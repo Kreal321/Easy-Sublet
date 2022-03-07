@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">EasySublet</string>
+    <string name="hello">Hello</string>
+    <string name="post_title_hint">Enter a post title</string>
+</resources>
