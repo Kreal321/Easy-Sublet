@@ -57,10 +57,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordEntry"
-        android:text="Sign in"
         android:layout_centerHorizontal="true"
         android:layout_margin="20dp"
-         />
+        android:text="@string/sign_in" />
+
+    <LinearLayout
+        android:id="@+id/signUpLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginBtn"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/signUpTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up_question"
+            android:textColor="@color/white" />
+        <Button
+            android:id="@+id/signUpBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="@string/sign_up"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
 
 
 
