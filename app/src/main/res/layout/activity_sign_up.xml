@@ -5,25 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/house"
-    tools:context=".MainActivity">
+    tools:context=".SignUpActivity">
 
     <TextView
-        android:id="@+id/hello"
+        android:id="@+id/get_start_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
         android:gravity="center"
-        android:text="@string/hello"
+        android:text="@string/get_start"
         android:textColor="@color/white"
         android:textSize="35sp"
         android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/userNameEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/get_start_header"
+        android:layout_margin="20dp"
+        android:background="#70ffffff"
+        android:drawableStart="@drawable/ic_baseline_person_outline_24"
+        android:drawablePadding="20dp"
+        android:ems="10"
+        android:hint="@string/username"
+        android:inputType="textNoSuggestions"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
         android:id="@+id/emailEntry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/userNameEntry"
         android:layout_margin="20dp"
-        android:layout_below="@+id/hello"
         android:background="#70ffffff"
         android:drawableStart="@drawable/ic_baseline_person_outline_24"
         android:drawablePadding="20dp"
@@ -33,59 +50,50 @@
         android:padding="20dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        />
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/passwordEntry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:layout_below="@+id/emailEntry"
+        android:layout_margin="20dp"
         android:background="#70ffffff"
         android:drawableStart="@drawable/ic_baseline_lock_24"
         android:drawablePadding="20dp"
         android:ems="10"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:padding="20dp"
-        android:hint="@string/password"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-     />
+        tools:ignore="TextContrastCheck" />
 
-    <Button
-        android:id="@+id/loginBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/passwordEntry"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
-        android:text="@string/sign_in" />
-
-    <LinearLayout
-        android:id="@+id/signUpLayout"
+    <EditText
+        android:id="@+id/confirmPasswordEntry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/loginBtn"
-        android:gravity="center"
-        android:layout_marginTop="20dp">
+        android:layout_below="@+id/passwordEntry"
+        android:layout_margin="20dp"
+        android:background="#70ffffff"
+        android:drawableStart="@drawable/ic_baseline_lock_24"
+        android:drawablePadding="20dp"
+        android:ems="10"
+        android:hint="@string/confirm_pw"
 
-        <TextView
-            android:id="@+id/signUpTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sign_up_question"
-            android:textColor="@color/white" />
-        <Button
-            android:id="@+id/signUpBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:text="@string/sign_up"
-            android:textAllCaps="false"/>
+        android:inputType="textPassword"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        tools:ignore="TextContrastCheck" />
 
-    </LinearLayout>
-
-
-
+    <Button
+        android:id="@+id/signUpBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/confirmPasswordEntry"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:text="@string/sign_up" />
 
 </RelativeLayout>
