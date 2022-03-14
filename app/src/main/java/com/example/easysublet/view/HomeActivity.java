@@ -1,28 +1,36 @@
-package com.example.easysublet;
+package com.example.easysublet.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class HomeActivity extends AppCompatActivity {
+import com.example.easysublet.R;
+import com.example.easysublet.databinding.ActivityHomeBinding;
+import com.example.easysublet.viewmodel.HomeViewModel;
+
+public class HomeActivity extends AppCompatActivity{
 
     private static final String TAG = "HomeActivity";
-    private String user;
-    private TextView mWelcome;
 
-    public static Intent newIntent(Context packageContext, String userName){
+    private HomeViewModel homeViewModel;
+    private ActivityHomeBinding binding;
+
+    public static Intent newIntent(Context packageContext, String email){
         Intent intent = new Intent(packageContext, HomeActivity.class);
-        intent.putExtra("userName", userName);
-        return  intent;
+        intent.putExtra("email", email);
+        return intent;
     }
 
     private void setResultCode(int code, String message){
@@ -34,12 +42,18 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
         Log.d(TAG, "onCreate() is called");
 
-        user = getIntent().getStringExtra("userName");
-        mWelcome = (TextView) findViewById(R.id.welcome);
-        mWelcome.append(" " + user);
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+
+        homeViewModel.setUser(getIntent().getStringExtra("email"));
+
+        binding.welcome.append(" " + homeViewModel.getUser().getValue().getUsername());
+
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = (Fragment) fm.findFragmentById(R.id.fragment_container);
@@ -52,12 +66,25 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         setResultCode(Activity.RESULT_OK, "Log out successfully");
+
+        /** snip **/
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("ACTION_LOGOUT");
+        registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.d(TAG,"Logout in progress");
+                finish();
+            }
+        }, intentFilter);
+        //** snip **//
     }
+
+
 
     @Override
     protected void onStart() {
         super.onStart();
-        Toast.makeText(getApplicationContext(), "Invoked onStart()", Toast.LENGTH_LONG).show();
         Log.d(TAG, "onStart() is called");
     }
 

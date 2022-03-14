@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/house"
-    tools:context=".SignUpActivity">
+    tools:context=".view.SignUpActivity">
 
     <TextView
         android:id="@+id/get_start_header"
@@ -19,7 +19,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/userNameEntry"
+        android:id="@+id/usernameEntry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/get_start_header"
@@ -39,7 +39,7 @@
         android:id="@+id/emailEntry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/userNameEntry"
+        android:layout_below="@+id/usernameEntry"
         android:layout_margin="20dp"
         android:background="#70ffffff"
         android:drawableStart="@drawable/ic_baseline_person_outline_24"

@@ -10,19 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasySublet">
         <activity
-            android:name=".ChangePasswordActivity"
+            android:name=".view.SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingActivity"
+            android:name=".view.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".view.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
