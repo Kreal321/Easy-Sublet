@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/5236/try/EasySublet/app/src/main/res/layout-land/activity_main.xml" value="0.468694885361552" />
+        <entry key="..\:/5236/try/EasySublet/app/src/main/res/layout/activity_change_password.xml" value="0.5536458333333333" />
+        <entry key="..\:/5236/try/EasySublet/app/src/main/res/layout/activity_home.xml" value="0.5536458333333333" />
+        <entry key="..\:/5236/try/EasySublet/app/src/main/res/layout/activity_main.xml" value="0.5536458333333333" />
+        <entry key="..\:/5236/try/EasySublet/app/src/main/res/layout/activity_setting.xml" value="0.5536458333333333" />
+        <entry key="..\:/5236/try/EasySublet/app/src/main/res/layout/activity_sign_up.xml" value="0.5536458333333333" />
+        <entry key="..\:/5236/try/EasySublet/app/src/main/res/layout/fragment_change_password.xml" value="0.5443886097152428" />
+        <entry key="..\:/5236/try/EasySublet/app/src/main/res/layout/fragment_post.xml" value="0.5536458333333333" />
+        <entry key="..\:/5236/try/EasySublet/app/src/main/res/layout/fragment_setting.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.189" />
         <entry key="app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.189" />
         <entry key="app/src/main/res/drawable/ic_baseline_person_outline_24.xml" value="0.189" />

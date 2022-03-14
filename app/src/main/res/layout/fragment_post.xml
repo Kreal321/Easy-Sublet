@@ -11,4 +11,12 @@
         android:layout_height="wrap_content"
         android:hint="@string/post_title_hint"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/setting"
+        android:id="@+id/settingBtn"
+        android:layout_margin="20dp"
+        android:layout_below="@+id/post_title" />
+
 </LinearLayout>

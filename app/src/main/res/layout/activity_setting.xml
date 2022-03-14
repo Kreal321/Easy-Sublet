@@ -4,7 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingActivity">
+    android:background="@color/white"
+    tools:context=".view.SettingActivity">
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/settingTitle"
@@ -53,4 +60,6 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:text="@string/log_out" />
+
+
 </RelativeLayout>
