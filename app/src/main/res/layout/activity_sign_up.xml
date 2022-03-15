@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signUpLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
     android:background="@mipmap/house"
     tools:context=".view.SignUpActivity">
 
     <TextView
         android:id="@+id/get_start_header"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_margin="50dp"
         android:gravity="center"
         android:text="@string/get_start"
         android:textColor="@color/white"
         android:textSize="35sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.038" />
 
     <EditText
         android:id="@+id/usernameEntry"
@@ -33,6 +42,12 @@
         android:padding="20dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailEntry"
+        app:layout_constraintVertical_bias="0.037"
         tools:ignore="TextContrastCheck" />
 
     <EditText
@@ -50,6 +65,11 @@
         android:padding="20dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/get_start_header"
+        app:layout_constraintVertical_bias="0.027"
         tools:ignore="TextContrastCheck" />
 
     <EditText
@@ -67,7 +87,11 @@
         android:padding="20dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        tools:ignore="TextContrastCheck" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameEntry"
+        app:layout_constraintVertical_bias="0.048"
+        tools:ignore="TextContrastCheck"
+        tools:layout_editor_absoluteX="20dp" />
 
     <EditText
         android:id="@+id/confirmPasswordEntry"
@@ -85,6 +109,11 @@
         android:padding="20dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEntry"
+        app:layout_constraintVertical_bias="0.058"
         tools:ignore="TextContrastCheck" />
 
     <Button
@@ -94,6 +123,10 @@
         android:layout_below="@+id/confirmPasswordEntry"
         android:layout_centerHorizontal="true"
         android:layout_margin="20dp"
-        android:text="@string/sign_up" />
+        android:text="@string/sign_up"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordEntry" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

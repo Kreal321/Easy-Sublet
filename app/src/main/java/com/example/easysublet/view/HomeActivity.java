@@ -1,23 +1,24 @@
 package com.example.easysublet.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.easysublet.R;
 import com.example.easysublet.databinding.ActivityHomeBinding;
+import com.example.easysublet.model.User;
 import com.example.easysublet.viewmodel.HomeViewModel;
 
 public class HomeActivity extends AppCompatActivity{
@@ -49,10 +50,18 @@ public class HomeActivity extends AppCompatActivity{
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        SharedPreferences emailStored = getSharedPreferences("email",Context.MODE_PRIVATE);
+        String email = emailStored.getString("email",null);
+        homeViewModel.setUser(email);
 
-        homeViewModel.setUser(getIntent().getStringExtra("email"));
+        homeViewModel.getUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                binding.welcome.append(" " + user.getUsername());
+            }
+        });
 
-        binding.welcome.append(" " + homeViewModel.getUser().getValue().getUsername());
+
 
 
         FragmentManager fm = getSupportFragmentManager();

@@ -1,23 +1,21 @@
 package com.example.easysublet.view;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-
 import com.example.easysublet.R;
-import com.example.easysublet.databinding.ActivityHomeBinding;
 import com.example.easysublet.databinding.ActivitySettingBinding;
-import com.example.easysublet.viewmodel.HomeViewModel;
 import com.example.easysublet.viewmodel.SettingViewModel;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
@@ -26,6 +24,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
     private SettingViewModel settingViewModel;
     private ActivitySettingBinding binding;
+    private FragmentManager fm;
+    private Fragment fragment;
 
     public static Intent newIntent(Context packageContext, String email){
         Intent intent = new Intent(packageContext, SettingActivity.class);
@@ -44,11 +44,16 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         View view = binding.getRoot();
         setContentView(view);
 
-        settingViewModel.setUser(getIntent().getStringExtra("email"));
+        SharedPreferences emailStored = getSharedPreferences("email",Context.MODE_PRIVATE);
+        String email = emailStored.getString("email",null);
+        settingViewModel.setUser(email);
 
         binding.changePwBtn.setOnClickListener(this);
         binding.deleteAccountBtn.setOnClickListener(this);
         binding.logoutBtn.setOnClickListener(this);
+
+        fm = getSupportFragmentManager();
+        fragment = (Fragment) fm.findFragmentById(R.id.fragment_container_view);
 
         /** snip **/
         IntentFilter intentFilter = new IntentFilter();
@@ -63,17 +68,19 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         //** snip **//
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.changePwBtn:
-                FragmentManager fm = getSupportFragmentManager();
-                Fragment fragment = (Fragment) fm.findFragmentById(R.id.fragment_container);
-
+//                FragmentManager fm = getSupportFragmentManager();
+//                Fragment fragment = (Fragment) fm.findFragmentById(R.id.fragment_container_view);
+//                Bundle bundle = new Bundle();
                 if (fragment == null) {
                     fragment = new ChangePasswordFragment();
                     fm.beginTransaction()
-                            .add(R.id.fragment_container, fragment)
+                            .setReorderingAllowed(true)
+                            .add(R.id.fragment_container_view, fragment,null)
                             .commit();
                 }
 

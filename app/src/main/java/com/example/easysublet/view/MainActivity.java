@@ -1,18 +1,15 @@
 package com.example.easysublet.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
-import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.easysublet.R;
 import com.example.easysublet.databinding.ActivityMainBinding;
@@ -66,14 +63,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View view = binding.getRoot();
         setContentView(view);
 
-
         binding.loginBtn.setOnClickListener(this);
         binding.signUpBtn.setOnClickListener(this);
-
         mainViewModel.getUser().observe(this, new Observer<User>() {
             @Override
-            public void onChanged(User user) {
-
+            public void onChanged(User User) {
+                updateUI(User);
             }
         });
 
@@ -81,20 +76,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v){
+        String sEmail = binding.emailEntry.getText().toString();
+        String sPass = binding.passwordEntry.getText().toString();
         switch (v.getId()) {
             case R.id.loginBtn:
-                if (mainViewModel.setUser(binding.emailEntry.getText().toString(), binding.passwordEntry.getText().toString())){
-                    Toast.makeText(MainActivity.this,"success", Toast.LENGTH_SHORT).show();
-                    Intent intent = HomeActivity.newIntent(MainActivity.this, "User");
-                    startActivityForResult(intent, REQUEST_CODE_HOME);
-                } else {
-                    Toast.makeText(MainActivity.this,"fail", Toast.LENGTH_SHORT).show();
+                if (!sEmail.isEmpty() && !sPass.isEmpty()){
+                    mainViewModel.setUser(sEmail , sPass);
                 }
                 break;
 
             case R.id.signUpBtn:
                 Intent intent = SignUpActivity.newIntent(MainActivity.this, binding.emailEntry.getText().toString());
-                startActivityForResult(intent, REQUEST_CODE_SIGNUP);
+                startActivity(intent);
                 break;
 
             default:
@@ -102,36 +95,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart() is called");
+    public void updateUI(User user){
+
+        if(user != null){
+            Toast.makeText(this,"Logged In successfully",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this,HomeActivity.class));
+
+        }else {
+            Toast.makeText(this,"Incorrect Info",Toast.LENGTH_LONG).show();
+        }
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume() is called");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause() is called");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop() is called");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy() is called");
-    }
 
 }
 

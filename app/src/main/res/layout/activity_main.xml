@@ -58,7 +58,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordEntry"
         android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/sign_in" />
 
     <LinearLayout

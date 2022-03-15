@@ -14,6 +14,13 @@ public class User {
     }
 
     @Nullable
+    public String getPassword() {
+        return password;
+    }
+
+    public User(){}
+
+    @Nullable
     public String getUsername() {
         return username;
     }
@@ -39,7 +46,12 @@ public class User {
     }
 
     @Nullable
-    public boolean setPassword(String oldPassword, String newPassword) {
+    public void setPassword(String Password) {
+        this.password = Password;
+    }
+
+    @Nullable
+    public boolean updatePassword(String oldPassword, String newPassword) {
         if(!passwordIsCorrect(oldPassword)) {
             return false;
         }

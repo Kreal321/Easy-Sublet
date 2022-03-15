@@ -1,21 +1,17 @@
 package com.example.easysublet.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
-import android.app.Activity;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.easysublet.R;
-import com.example.easysublet.databinding.ActivityMainBinding;
 import com.example.easysublet.databinding.ActivitySignUpBinding;
 import com.example.easysublet.model.User;
 import com.example.easysublet.viewmodel.SignUpViewModel;
@@ -63,15 +59,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.signUpBtn:
-                if (!binding.passwordEntry.getText().toString().equals(binding.confirmPasswordEntry.getText().toString())) {
-                    Toast.makeText(SignUpActivity.this,"Two passwords are different", Toast.LENGTH_SHORT).show();
-                    binding.passwordEntry.setText(null);
-                    binding.confirmPasswordEntry.setText(null);
-                } else if (!signUpViewModel.addUser(binding.usernameEntry.getText().toString(), binding.emailEntry.getText().toString(), binding.passwordEntry.getText().toString())) {
-                    Toast.makeText(SignUpActivity.this,"Email is registered", Toast.LENGTH_SHORT).show();
-                } else {
-                    message = "Sign up success. Please sign in.";
-                    finish();
+
+                if(binding.passwordEntry!=null && binding.emailEntry!=null&&binding.usernameEntry!=null) {
+                    if (!binding.passwordEntry.getText().toString().equals(binding.confirmPasswordEntry.getText().toString())) {
+                        Toast.makeText(SignUpActivity.this, "Two passwords are different", Toast.LENGTH_SHORT).show();
+                        binding.passwordEntry.setText(null);
+                        binding.confirmPasswordEntry.setText(null);
+                    } else{
+                        signUpViewModel.addUser(binding.usernameEntry.getText().toString(), binding.emailEntry.getText().toString(), binding.passwordEntry.getText().toString());
+                        Toast.makeText(SignUpActivity.this, "Email is registered", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
                 }
                 break;
 

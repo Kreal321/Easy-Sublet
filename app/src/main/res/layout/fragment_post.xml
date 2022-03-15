@@ -9,7 +9,9 @@
         android:id="@+id/post_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/post_title_hint"/>
+        android:hint="@string/post_title_hint"
+        android:minHeight="48dp"
+        android:textColorHint="#757575" />
 
     <Button
         android:layout_width="match_parent"

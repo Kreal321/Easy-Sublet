@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "162955773104",
+    "project_id": "easysublet-d9441",
+    "storage_bucket": "easysublet-d9441.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162955773104:android:65621200051ba2bd8fe775",
+        "android_client_info": {
+          "package_name": "com.example.easysublet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162955773104-8aulonmlsd6ue3rqk87n0l9tnsbe7mm7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoq5ovb3bk7mVfo3KKBVfunHNUKDB9keI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162955773104-8aulonmlsd6ue3rqk87n0l9tnsbe7mm7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
