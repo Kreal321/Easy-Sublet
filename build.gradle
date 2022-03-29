@@ -5,6 +5,7 @@ buildscript {// for firebase
     repositories {
         // Check that you have the following line (if not, add it):
         google()  // Google's Maven repository
+
     }
 
     dependencies {
@@ -14,7 +15,6 @@ buildscript {// for firebase
         classpath 'com.google.gms:google-services:4.3.10'  // Google Services plugin
     }
 }
-
 
 
 plugins {

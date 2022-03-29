@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(user != null){
             Toast.makeText(this,"Logged In successfully",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this,HomeActivity.class));
+            startActivity(new Intent(this, NavActivity.class));
 
         }else {
             Toast.makeText(this,"Incorrect Info",Toast.LENGTH_LONG).show();

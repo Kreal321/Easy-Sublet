@@ -9,13 +9,13 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.easysublet.model.User;
 import com.example.easysublet.repository.mainRepo;
 
-public class HomeViewModel extends AndroidViewModel {
+public class NavViewModel extends AndroidViewModel {
 
     private MutableLiveData<User> userMutableLiveData;
     private static final String TAG = "MainViewModel";
     private mainRepo repository;
 
-    public HomeViewModel(@NonNull Application application){
+    public NavViewModel(@NonNull Application application){
         super(application);
         repository = new mainRepo(application);
         userMutableLiveData = repository.getMutableLiveData();
