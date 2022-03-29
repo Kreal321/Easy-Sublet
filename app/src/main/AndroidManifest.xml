@@ -10,12 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasySublet" >
         <activity
+            android:name=".AddPostActivity"
+            android:exported="false"
+            android:label="@string/title_activity_add_post"
+            android:theme="@style/Theme.EasySublet.NoActionBar" />
+        <activity
             android:name=".view.NavActivity"
             android:exported="false"
             android:label="@string/title_activity_nav" />
-        <activity
-            android:name=".view.SettingActivity"
-            android:exported="false" />
         <activity
             android:name=".view.SignUpActivity"
             android:exported="false" />

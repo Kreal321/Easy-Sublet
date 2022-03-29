@@ -55,11 +55,11 @@ public class NavActivity extends AppCompatActivity {
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_find_home, R.id.navigation_find_roommates, R.id.navigation_profile)
-                .build();
+//        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+//                R.id.navigation_find_home, R.id.navigation_find_roommates, R.id.navigation_profile)
+//                .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_nav);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
