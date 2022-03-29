@@ -17,6 +17,7 @@
     <string name="change_pw">Change Password</string>
     <string name="delete_acc">Delete Account</string>
     <string name="confirm">Confirm</string>
+    <string name="map_button">Map Button</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="find_home">Find Home</string>
     <string name="find_roommate">Find Roommates</string>
