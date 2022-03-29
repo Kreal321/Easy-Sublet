@@ -62,6 +62,8 @@ public class FindHomeFragment extends Fragment implements View.OnClickListener {
         list.add(new Post(R.drawable.house3));
         postAdapter = new PostAdapter(root.getContext(),list);
         recyclerView.setAdapter(postAdapter);
+
+
         return root;
     }
 
