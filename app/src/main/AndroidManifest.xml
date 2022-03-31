@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasySublet" >
         <activity
-            android:name=".AddPostActivity"
+            android:name=".view.AddPostActivity"
             android:exported="false"
             android:label="@string/title_activity_add_post"
             android:theme="@style/Theme.EasySublet.NoActionBar" />
