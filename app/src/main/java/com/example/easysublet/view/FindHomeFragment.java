@@ -12,6 +12,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import com.example.easysublet.AddPostActivity;
+import com.example.easysublet.Post;
+import com.example.easysublet.PostAdapter;
 
 import com.example.easysublet.R;
 import com.example.easysublet.databinding.FragmentFindHomeBinding;
@@ -19,12 +25,17 @@ import com.example.easysublet.model.User;
 import com.example.easysublet.viewmodel.FindHomeViewModel;
 import com.example.easysublet.viewmodel.ProfileViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FindHomeFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "FindHomeFragment";
 
     private FindHomeViewModel findHomeViewModel;
     private FragmentFindHomeBinding binding;
+    private RecyclerView recyclerView;
+    private PostAdapter postAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +51,18 @@ public class FindHomeFragment extends Fragment implements View.OnClickListener {
         findHomeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         binding.addPostBtn.setOnClickListener(this);
+
+        recyclerView = binding.recyclerView;
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        List<Post> list = new ArrayList<>();
+        list.add(new Post(R.drawable.apart1));
+        list.add(new Post(R.drawable.apart2));
+        list.add(new Post(R.drawable.house1));
+        list.add(new Post(R.drawable.house2));
+        list.add(new Post(R.drawable.house3));
+        postAdapter = new PostAdapter(root.getContext(),list);
+        recyclerView.setAdapter(postAdapter);
+
 
         return root;
     }
