@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 
-import com.example.easysublet.Post;
+import com.example.easysublet.model.Post;
 import com.example.easysublet.PostAdapter;
 
 import com.example.easysublet.R;
@@ -51,14 +51,14 @@ public class FindRoommatesFragment extends Fragment implements View.OnClickListe
         findRoommatesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         recyclerView = binding.recyclerView;
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         List<Post> list = new ArrayList<>();
-        list.add(new Post(R.drawable.apart1));
-        list.add(new Post(R.drawable.apart2));
-        list.add(new Post(R.drawable.house1));
-        list.add(new Post(R.drawable.house2));
-        list.add(new Post(R.drawable.house3));
-        postAdapter = new PostAdapter(root.getContext(),list);
+        list.add(new Post("This is post 1", R.drawable.apart1, 1));
+        list.add(new Post("This is post 2",R.drawable.apart2, 2));
+        list.add(new Post("This is post 3",R.drawable.house1, 3));
+        list.add(new Post("This is post 4",R.drawable.house2, 4));
+        list.add(new Post("This is post 5",R.drawable.house3, 5));
+        postAdapter = new PostAdapter(root.getContext(), list);
         recyclerView.setAdapter(postAdapter);
 
         binding.addPostBtn.setOnClickListener(this);

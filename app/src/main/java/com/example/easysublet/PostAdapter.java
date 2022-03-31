@@ -4,7 +4,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
+import android.widget.Toast;
+import com.example.easysublet.model.Post;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +30,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         // bind image here
-        holder.img.setImageResource(mData.get(position).getImage());
+        Post p = mData.get(position);
+        holder.img.setImageResource(p.getImage());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(mContext, "click on post " + p.getIdx(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
     }
 
     @Override
