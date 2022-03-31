@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.example.easysublet.AddPostActivity;
+
 import com.example.easysublet.Post;
 import com.example.easysublet.PostAdapter;
 
@@ -53,7 +53,7 @@ public class FindHomeFragment extends Fragment implements View.OnClickListener {
         binding.addPostBtn.setOnClickListener(this);
 
         recyclerView = binding.recyclerView;
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         List<Post> list = new ArrayList<>();
         list.add(new Post(R.drawable.apart1));
         list.add(new Post(R.drawable.apart2));

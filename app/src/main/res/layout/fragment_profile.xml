@@ -48,14 +48,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="User Name"
+                app:startIconDrawable="@drawable/ic_person"
                 android:layout_marginBottom="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/usernameEntry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_baseline_person_outline_24"
-                    android:drawablePadding="10dp"
                     android:text="Walter" />
 
 
@@ -65,14 +64,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
+                app:startIconDrawable="@drawable/ic_email"
                 android:layout_marginBottom="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailEntry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_baseline_person_outline_24"
-                    android:drawablePadding="10dp"
                     android:text="walter@hotmail.com" />
 
 
@@ -99,15 +97,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Old Password"
+                app:startIconDrawable="@drawable/ic_lock"
+                app:endIconMode="password_toggle"
                 android:layout_marginBottom="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/oldPasswordEntry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:drawableLeft="@drawable/ic_baseline_person_outline_24"
-                    android:drawablePadding="10dp"/>
+                    android:inputType="textPassword"/>
 
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -116,15 +114,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="New Password"
+                app:startIconDrawable="@drawable/ic_lock"
+                app:endIconMode="password_toggle"
                 android:layout_marginBottom="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/newPasswordEntry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:drawableLeft="@drawable/ic_baseline_person_outline_24"
-                    android:drawablePadding="10dp"/>
+                    android:inputType="textPassword"/>
 
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -133,15 +131,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Confirm Password"
+                app:startIconDrawable="@drawable/ic_lock"
+                app:endIconMode="password_toggle"
                 android:layout_marginBottom="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/confirmPasswordEntry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:drawableLeft="@drawable/ic_baseline_person_outline_24"
-                    android:drawablePadding="10dp"/>
+                    android:inputType="textPassword"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -159,27 +157,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <Button
                 android:id="@+id/logoutBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/log_out"
                 android:layout_marginBottom="10dp"
-                android:background="#fece2f" />
+                android:background="#fece2f"
+                android:text="@string/log_out" />
 
             <Button
                 android:id="@+id/deleteAccountBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/delete_acc"
-                android:background="#fece2f" />
+                android:background="#fece2f"
+                android:text="@string/delete_acc" />
 
         </LinearLayout>
-
-
 
 
     </LinearLayout>
