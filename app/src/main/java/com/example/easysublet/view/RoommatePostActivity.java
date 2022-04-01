@@ -9,10 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.easysublet.databinding.ActivityHomePostBinding;
 import com.example.easysublet.databinding.ActivityRoommatePostBinding;
-import com.example.easysublet.model.Post;
-import com.example.easysublet.viewmodel.HomePostViewModel;
+import com.example.easysublet.model.RoommatePost;
 import com.example.easysublet.viewmodel.RoommatePostViewModel;
 
 public class RoommatePostActivity extends AppCompatActivity {
@@ -38,11 +36,11 @@ public class RoommatePostActivity extends AppCompatActivity {
         binding = ActivityRoommatePostBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        roommatePostViewModel.getPost().observe(this, new Observer<Post>() {
+        roommatePostViewModel.getPost().observe(this, new Observer<RoommatePost>() {
             @Override
-            public void onChanged(Post post) {
-                binding.title.setText(post.getTitle());
-                binding.image.setImageResource(post.getImage());
+            public void onChanged(RoommatePost roommatePost) {
+                binding.title.setText(roommatePost.getTitle());
+                binding.image.setImageResource(roommatePost.getImage());
             }
         });
 

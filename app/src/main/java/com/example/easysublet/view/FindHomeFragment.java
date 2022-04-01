@@ -1,11 +1,13 @@
 package com.example.easysublet.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,17 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 
-import com.example.easysublet.model.Post;
-import com.example.easysublet.PostAdapter;
+import com.example.easysublet.model.HomePost;
+import com.example.easysublet.model.RoommatePost;
 
 import com.example.easysublet.R;
 import com.example.easysublet.databinding.FragmentFindHomeBinding;
-import com.example.easysublet.model.User;
 import com.example.easysublet.repository.mainRepo;
 import com.example.easysublet.viewmodel.FindHomeViewModel;
-import com.example.easysublet.viewmodel.ProfileViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FindHomeFragment extends Fragment implements View.OnClickListener {
@@ -52,10 +51,11 @@ public class FindHomeFragment extends Fragment implements View.OnClickListener {
         findHomeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         binding.addPostBtn.setOnClickListener(this);
+        binding.mapButton.setOnClickListener(this);
 
         recyclerView = binding.recyclerView;
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        List<Post> list = mainRepo.getList();
+        List<HomePost> list = mainRepo.getHomePostList();
         postAdapter = new PostAdapter(getActivity(), list);
         recyclerView.setAdapter(postAdapter);
 
@@ -76,9 +76,57 @@ public class FindHomeFragment extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity().getApplicationContext(), "Add post", Toast.LENGTH_LONG).show();
                 break;
 
+            case R.id.map_button:
+                startActivity(new Intent(getActivity(), MapActivity.class));
+                break;
 
             default:
                 break;
+        }
+    }
+
+    private class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder>{
+        Context mContext;
+        List<HomePost> mData;
+
+        public PostAdapter(Context mContext, List<HomePost> mData) {
+            this.mContext = mContext;
+            this.mData = mData;
+        }
+
+        @NonNull
+        @Override
+        public PostAdapter.PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.post_list,parent,false);
+            return new PostViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
+            // bind image here
+            HomePost p = mData.get(position);
+            holder.img.setImageResource(p.getImage());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
+                       mContext.startActivity(HomePostActivity.newIntent(mContext, p.getIndex()));
+                       Toast.makeText(mContext, "click on post " + p.getIndex(), Toast.LENGTH_SHORT).show();
+                   }
+               }
+            );
+        }
+
+        @Override
+        public int getItemCount() {
+            return mData.size();
+        }
+
+        public class PostViewHolder extends RecyclerView.ViewHolder{
+            ImageView img;
+            public PostViewHolder(@NonNull View itemView){
+                super(itemView);
+                img = itemView.findViewById(R.id.post_image);
+            }
         }
     }
 

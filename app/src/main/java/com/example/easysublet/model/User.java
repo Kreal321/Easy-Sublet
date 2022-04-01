@@ -7,6 +7,8 @@ public class User {
     @Nullable
     private String username, email, password;
 
+    public User(){}
+
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
@@ -18,8 +20,6 @@ public class User {
         return password;
     }
 
-    public User(){}
-
     @Nullable
     public String getUsername() {
         return username;
@@ -28,11 +28,6 @@ public class User {
     @Nullable
     public String getEmail() {
         return email;
-    }
-
-    @Nullable
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     @Nullable

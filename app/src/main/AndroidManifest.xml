@@ -10,7 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasySublet">
         <activity
+            android:name=".view.MapActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.HomePostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.RoommatePostActivity"
             android:exported="false" />
         <activity
             android:name=".view.AddPostActivity"

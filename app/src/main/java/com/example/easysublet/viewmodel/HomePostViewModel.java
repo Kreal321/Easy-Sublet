@@ -6,15 +6,15 @@ import android.util.Log;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.easysublet.model.Post;
+import com.example.easysublet.model.HomePost;
+import com.example.easysublet.model.RoommatePost;
 import com.example.easysublet.repository.mainRepo;
 
 public class HomePostViewModel extends AndroidViewModel {
 
     private static final String TAG = "HomePostViewModel";
-    private final MutableLiveData<Post> mPost;
+    private final MutableLiveData<HomePost> mPost;
 
     public HomePostViewModel(Application application) {
         super(application);
@@ -24,10 +24,10 @@ public class HomePostViewModel extends AndroidViewModel {
     }
 
     public void setPost(int index) {
-        mPost.setValue(mainRepo.getPost(index));
+        mPost.setValue(mainRepo.getHomePost(index));
     }
 
-    public LiveData<Post> getPost() {
+    public LiveData<HomePost> getPost() {
         return mPost;
     }
 }

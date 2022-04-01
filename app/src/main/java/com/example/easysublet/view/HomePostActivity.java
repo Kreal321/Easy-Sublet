@@ -10,8 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.easysublet.databinding.ActivityHomePostBinding;
-import com.example.easysublet.model.Post;
-import com.example.easysublet.repository.mainRepo;
+import com.example.easysublet.model.HomePost;
+import com.example.easysublet.model.RoommatePost;
 import com.example.easysublet.viewmodel.HomePostViewModel;
 
 public class HomePostActivity extends AppCompatActivity {
@@ -37,11 +37,11 @@ public class HomePostActivity extends AppCompatActivity {
         binding = ActivityHomePostBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        homePostViewModel.getPost().observe(this, new Observer<Post>() {
+        homePostViewModel.getPost().observe(this, new Observer<HomePost>() {
             @Override
-            public void onChanged(Post post) {
-                binding.title.setText(post.getTitle());
-                binding.image.setImageResource(post.getImage());
+            public void onChanged(HomePost homePost) {
+                binding.title.setText(homePost.getTitle());
+                binding.image.setImageResource(homePost.getImage());
             }
         });
 
