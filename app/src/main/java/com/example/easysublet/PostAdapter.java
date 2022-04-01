@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.example.easysublet.model.Post;
+import com.example.easysublet.view.HomePostActivity;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +37,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        mContext.startActivity(HomePostActivity.newIntent(mContext, p.getIdx()));
                         Toast.makeText(mContext, "click on post " + p.getIdx(), Toast.LENGTH_SHORT).show();
                     }
                 }

@@ -21,6 +21,7 @@ import com.example.easysublet.PostAdapter;
 import com.example.easysublet.R;
 import com.example.easysublet.databinding.FragmentFindRoommatesBinding;
 import com.example.easysublet.databinding.FragmentFindRoommatesBinding;
+import com.example.easysublet.repository.mainRepo;
 import com.example.easysublet.viewmodel.FindRoommatesViewModel;
 
 
@@ -50,19 +51,13 @@ public class FindRoommatesFragment extends Fragment implements View.OnClickListe
         final TextView textView = binding.textHome;
         findRoommatesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        recyclerView = binding.recyclerView;
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        List<Post> list = new ArrayList<>();
-        list.add(new Post("This is post 1", R.drawable.apart1, 1));
-        list.add(new Post("This is post 2",R.drawable.apart2, 2));
-        list.add(new Post("This is post 3",R.drawable.house1, 3));
-        list.add(new Post("This is post 4",R.drawable.house2, 4));
-        list.add(new Post("This is post 5",R.drawable.house3, 5));
-        postAdapter = new PostAdapter(root.getContext(), list);
-        recyclerView.setAdapter(postAdapter);
-
         binding.addPostBtn.setOnClickListener(this);
 
+        recyclerView = binding.recyclerView;
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        List<Post> list = mainRepo.getList();
+        postAdapter = new PostAdapter(root.getContext(), list);
+        recyclerView.setAdapter(postAdapter);
 
         return root;
     }

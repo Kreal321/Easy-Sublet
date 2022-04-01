@@ -8,12 +8,17 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.easysublet.R;
+import com.example.easysublet.model.Post;
 import com.example.easysublet.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class mainRepo {
 
@@ -105,6 +110,30 @@ public class mainRepo {
         userLoggedData.postValue(true);
     }
 
+    public static List<Post> getList() {
+        List<Post> list = new ArrayList<>();
+        list.add(new Post("This is post 1", R.drawable.apart1, 1));
+        list.add(new Post("This is post 2",R.drawable.apart2, 2));
+        list.add(new Post("This is post 3",R.drawable.house1, 3));
+        list.add(new Post("This is post 4",R.drawable.house2, 4));
+        list.add(new Post("This is post 5",R.drawable.house3, 5));
+        list.add(new Post("This is post 5",R.drawable.house3, 5));
+        list.add(new Post("This is post 6", R.drawable.apart1, 6));
+        list.add(new Post("This is post 7",R.drawable.apart2, 7));
+        list.add(new Post("This is post 8",R.drawable.house1, 8));
+        list.add(new Post("This is post 9",R.drawable.house2, 9));
+        list.add(new Post("This is post 10",R.drawable.house3, 10));
+        list.add(new Post("This is post 11", R.drawable.apart1, 11));
+        list.add(new Post("This is post 12",R.drawable.apart2, 12));
+        list.add(new Post("This is post 13",R.drawable.house1, 13));
+        list.add(new Post("This is post 14",R.drawable.house2, 14));
+        list.add(new Post("This is post 15",R.drawable.house3, 15));
+        return list;
+    }
 
+    public static Post getPost(int idx) {
+        List<Post> list = getList();
+        return list.get(idx);
+    }
 
 }
