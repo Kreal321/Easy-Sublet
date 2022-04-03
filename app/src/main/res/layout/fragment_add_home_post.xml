@@ -18,6 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:hint="@string/address"
+        app:startIconDrawable="@drawable/ic_action_home"
         app:helperText="@string/required"
         app:helperTextTextColor="@color/red"
         app:endIconMode="clear_text"
@@ -39,6 +40,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
+        app:startIconDrawable="@drawable/ic_action_calender"
         app:helperText="@string/required"
         app:helperTextTextColor="@color/red"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +57,68 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/tilRentEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilTimePicker"
+        android:hint="@string/rent"
+        app:startIconDrawable="@drawable/ic_action_money"
+        app:helperText="@string/required"
+        app:helperTextTextColor="@color/red"
+        app:endIconMode="clear_text"
+        app:endIconDrawable="@drawable/ic_action_cancel">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/rentEntry"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/tilInfoEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilRentEntry"
+        android:hint="@string/more_info"
+        android:gravity="center_horizontal"
+        app:endIconMode="clear_text"
+        app:endIconDrawable="@drawable/ic_action_cancel">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/infoEntry"
+            android:inputType="textMultiLine|textLongMessage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lines="5"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/createBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tilInfoEntry"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/post" />
+
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
@@ -68,6 +132,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
