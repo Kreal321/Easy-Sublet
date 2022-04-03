@@ -19,6 +19,15 @@
     <string name="confirm">Confirm</string>
     <string name="map_button">Map Button</string>
     <string name="image_description">This is an image</string>
+    <string name="address">Address</string>
+    <string name="required">Required*</string>
+    <string name="time_period">Time Period</string>
+    <string name="rent">Rent per Month</string>
+    <string name="expected_area">Expected Area</string>
+    <string name="expected_rent">Expected Rent per Month</string>
+    <string name="expected_time_period">Expected Time Period</string>
+    <string name="post">Post</string>
+    <string name="more_info">Provide more information...</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="find_home">Find Home</string>
     <string name="find_roommate">Find Roommates</string>
