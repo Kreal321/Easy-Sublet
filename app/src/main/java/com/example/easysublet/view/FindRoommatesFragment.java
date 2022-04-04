@@ -113,7 +113,7 @@ public class FindRoommatesFragment extends Fragment implements View.OnClickListe
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View view) {
-                       mContext.startActivity(RoommatePostActivity.newIntent(mContext, Integer.parseInt(p.getIndex())));
+                       mContext.startActivity(RoommatePostActivity.newIntent(mContext, p.getIndex()));
                        Toast.makeText(mContext, "click on post " + p.getIndex(), Toast.LENGTH_SHORT).show();
                    }
                }

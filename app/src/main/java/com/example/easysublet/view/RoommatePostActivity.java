@@ -20,7 +20,7 @@ public class RoommatePostActivity extends AppCompatActivity {
     private RoommatePostViewModel roommatePostViewModel;
     private ActivityRoommatePostBinding binding;
 
-    public static Intent newIntent(Context packageContext, int idx){
+    public static Intent newIntent(Context packageContext, String idx){
         Intent intent = new Intent(packageContext, RoommatePostActivity.class);
         intent.putExtra("idx", idx);
         return intent;
@@ -44,7 +44,7 @@ public class RoommatePostActivity extends AppCompatActivity {
             }
         });
 
-        roommatePostViewModel.setPost(getIntent().getIntExtra("idx", 0));
+        roommatePostViewModel.setPost(getIntent().getStringExtra("idx"));
 
     }
 }

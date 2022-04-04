@@ -134,9 +134,9 @@ public class mainRepo {
         return list;
     }
 
-    public static HomePost getHomePost(int idx) {
+    public static HomePost getHomePost(String idx) {
         List<HomePost> list = getHomePostList();
-        return list.get(idx-1);
+        return list.stream().filter(HomePost -> idx.equals(HomePost.getIndex())).findFirst().orElse(null);
     }
 
     public static List<RoommatePost> getRoommatePostList() {
@@ -159,9 +159,9 @@ public class mainRepo {
         return list;
     }
 
-    public static RoommatePost getRoommatePost(int idx) {
+    public static RoommatePost getRoommatePost(String idx) {
         List<RoommatePost> list = getRoommatePostList();
-        return list.get(idx-1);
+        return list.stream().filter(RoommatePost -> idx.equals(RoommatePost.getIndex())).findFirst().orElse(null);
     }
 
 }

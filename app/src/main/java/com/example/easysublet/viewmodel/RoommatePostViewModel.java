@@ -22,7 +22,7 @@ public class RoommatePostViewModel extends AndroidViewModel {
         Log.d(TAG, "RoommatePostViewModel() is called");
     }
 
-    public void setPost(int index) {
+    public void setPost(String index) {
         mPost.setValue(mainRepo.getRoommatePost(index));
     }
 

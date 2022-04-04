@@ -21,7 +21,7 @@ public class HomePostActivity extends AppCompatActivity {
     private HomePostViewModel homePostViewModel;
     private ActivityHomePostBinding binding;
 
-    public static Intent newIntent(Context packageContext, int idx){
+    public static Intent newIntent(Context packageContext, String idx){
         Intent intent = new Intent(packageContext, HomePostActivity.class);
         intent.putExtra("idx", idx);
         return intent;
@@ -45,7 +45,7 @@ public class HomePostActivity extends AppCompatActivity {
             }
         });
 
-        homePostViewModel.setPost(getIntent().getIntExtra("idx", 0));
+        homePostViewModel.setPost(getIntent().getStringExtra("idx"));
 
     }
 }
