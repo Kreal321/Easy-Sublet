@@ -28,6 +28,29 @@
     <string name="expected_time_period">Expected Time Period</string>
     <string name="post">Post</string>
     <string name="more_info">Provide more information...</string>
+    <string name="add_photo_des">Click to add photo for the post</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="cancel">Cancel</string>
+    <string name="title">Title</string>
+    <string name="contact">Phone Number</string>
+    <string name="bathroom">Bathroom</string>
+    <string name="bedroom">Bedroom</string>
+    <string name="preference_of_gender">Preference of Gender</string>
+    <string name="gender">Gender</string>
+    <string-array name="preferenceGenderList">
+        <item>Female</item>
+        <item>Male</item>
+        <item>No-preference</item>
+    </string-array>
+    <string-array name="genderList">
+        <item>Female</item>
+        <item>Male</item>
+        <item>Prefer not to say</item>
+    </string-array>
+    <string name="pet">Pet Friendly</string>
+    <string name="furnished">Furnished</string>
+    <string name="withPet">With Pet</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="find_home">Find Home</string>
     <string name="find_roommate">Find Roommates</string>
