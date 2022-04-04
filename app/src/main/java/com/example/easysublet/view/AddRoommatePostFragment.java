@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -13,7 +14,7 @@ import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.easysublet.databinding.FragmentAddHomePostBinding;
+import com.example.easysublet.R;
 import com.example.easysublet.databinding.FragmentAddRoommatePostBinding;
 import com.example.easysublet.viewmodel.AddPostViewModel;
 import com.google.android.material.datepicker.CalendarConstraints;
@@ -44,6 +45,26 @@ public class AddRoommatePostFragment extends Fragment {
         final TextView textView = binding.text;
         addPostViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
+        handleDatePicker();
+
+        return root;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String[] genderList = getResources().getStringArray(R.array.genderList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(requireContext(), R.layout.dropdown_item, genderList);
+        binding.genderEntry.setAdapter(arrayAdapter);
+    }
+
+    private void handleDatePicker() {
 
         TextInputLayout dateTextInput = binding.tilTimePicker;
         EditText dateEditText = dateTextInput.getEditText();
@@ -59,7 +80,7 @@ public class AddRoommatePostFragment extends Fragment {
         builder.setTitleText("SELECT DATE");
         builder.setCalendarConstraints(constraintsBuilder.build());
 
-        final MaterialDatePicker materialDatePicker = builder.build();
+        final MaterialDatePicker<Pair<Long, Long>> materialDatePicker = builder.build();
         dateEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,13 +94,6 @@ public class AddRoommatePostFragment extends Fragment {
             }
         });
 
-        return root;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 
 }
