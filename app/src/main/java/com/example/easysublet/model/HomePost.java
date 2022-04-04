@@ -1,7 +1,7 @@
 package com.example.easysublet.model;
 
 public class HomePost {
-    private int index;
+    private String index;
     private String username;
     private int image;
     private String title;
@@ -12,12 +12,12 @@ public class HomePost {
     private int bedroomNum;
     private boolean furnished;
     private String gender;
-    private String pet;
+    private boolean pet;
     private int rent;
     private String time;
     private String other;
 
-    public HomePost(int index, String username, int image, String title, boolean active, String address, String contact, int bathroomNum, int bedroomNum, boolean furnished, String gender, String pet, int rent, String time, String other) {
+    public HomePost(String index, String username, int image, String title, boolean active, String address, String contact, int bathroomNum, int bedroomNum, boolean furnished, String gender, boolean pet, int rent, String time, String other) {
         this.index = index;
         this.username = username;
         this.image = image;
@@ -35,7 +35,7 @@ public class HomePost {
         this.other = other;
     }
 
-    public int getIndex() {
+    public String getIndex() {
         return index;
     }
 
@@ -79,7 +79,7 @@ public class HomePost {
         return gender;
     }
 
-    public String getPet() {
+    public boolean getPet() {
         return pet;
     }
 

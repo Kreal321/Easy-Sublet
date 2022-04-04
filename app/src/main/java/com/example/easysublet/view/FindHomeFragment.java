@@ -109,7 +109,7 @@ public class FindHomeFragment extends Fragment implements View.OnClickListener {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View view) {
-                       mContext.startActivity(HomePostActivity.newIntent(mContext, p.getIndex()));
+                       mContext.startActivity(HomePostActivity.newIntent(mContext, Integer.parseInt(p.getIndex())));
                        Toast.makeText(mContext, "click on post " + p.getIndex(), Toast.LENGTH_SHORT).show();
                    }
                }

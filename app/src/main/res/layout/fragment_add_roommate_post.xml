@@ -47,7 +47,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tilTitleEntry"
-            android:hint="@string/expected_area"
+            android:hint="@string/preferred_address"
             app:startIconDrawable="@drawable/ic_action_home"
             app:helperText="@string/required"
             app:helperTextTextColor="@color/red"
@@ -78,9 +78,10 @@
             app:layout_constraintTop_toBottomOf="@id/tilAddressEntry">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/timeEntry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/expected_time_period"
+                android:hint="@string/preferred_period"
                 android:inputType="date"
                 android:imeOptions="flagNoExtractUi"
                 android:focusable="false"/>
@@ -98,7 +99,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tilTimePicker"
-            android:hint="@string/expected_rent"
+            android:hint="@string/preferred_rent"
             app:startIconDrawable="@drawable/ic_action_money"
             app:helperText="@string/required"
             app:helperTextTextColor="@color/red"
@@ -112,7 +113,6 @@
                 android:maxLines="1"/>
 
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -133,13 +133,12 @@
             app:endIconDrawable="@drawable/ic_action_cancel">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/contactEntry"
-                android:inputType="phone"
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"/>
 
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <LinearLayout
             android:id="@+id/llRoomNumber"
@@ -151,15 +150,15 @@
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilContactEntry"
-            >
+            app:layout_constraintTop_toBottomOf="@id/tilContactEntry">
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilBathroomEntry"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:hint="@string/bathroom"
+                android:hint="@string/preferred_bathroom"
                 app:endIconDrawable="@drawable/ic_action_cancel"
                 app:endIconMode="clear_text"
                 app:helperText="@string/required"
@@ -180,7 +179,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/bedroom"
+                android:hint="@string/preferred_bedroom"
                 app:endIconDrawable="@drawable/ic_action_cancel"
                 app:endIconMode="clear_text"
                 app:helperText="@string/required"
@@ -197,27 +196,24 @@
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/tilGenderEntry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
-            android:hint="@string/gender"
+            android:hint="@string/preference_of_gender"
             app:startIconDrawable="@drawable/ic_baseline_person_outline_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/llRoomNumber">
-            <AutoCompleteTextView
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/genderEntry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none"
-                >
-            </AutoCompleteTextView>
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -238,7 +234,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:text="@string/withPet">
+                android:text="@string/preferred_pet">
             </com.google.android.material.checkbox.MaterialCheckBox>
 
             <com.google.android.material.checkbox.MaterialCheckBox
@@ -247,7 +243,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_height="wrap_content"
-                android:text="@string/furnished">
+                android:text="@string/preferred_furnished">
             </com.google.android.material.checkbox.MaterialCheckBox>
         </LinearLayout>
 
@@ -312,20 +308,6 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
             android:text="@string/post" />
-
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

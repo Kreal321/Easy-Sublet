@@ -1,17 +1,12 @@
 package com.example.easysublet.view;
 
-import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
@@ -20,24 +15,21 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.easysublet.R;
 import com.example.easysublet.databinding.FragmentAddHomePostBinding;
-import com.example.easysublet.viewmodel.AddPostViewModel;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.example.easysublet.viewmodel.AddHomePostViewModel;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.TimeZone;
 
-public class AddHomePostFragment extends Fragment {
+public class AddHomePostFragment extends Fragment implements View.OnClickListener{
 
-    private static final String TAG = "FindRoommatesFragment";
+    private static final String TAG = "AddHomePostFragment";
     private FragmentAddHomePostBinding binding;
+    private AddHomePostViewModel addHomePostViewModel;
 
 
 
@@ -46,14 +38,12 @@ public class AddHomePostFragment extends Fragment {
 
         Log.d(TAG, "onCreateView() is called");
 
-        AddPostViewModel addPostViewModel =
-                new ViewModelProvider(requireActivity()).get(AddPostViewModel.class);
+        addHomePostViewModel = new ViewModelProvider(this).get(AddHomePostViewModel.class);
 
         binding = FragmentAddHomePostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.text;
-        addPostViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        binding.createBtn.setOnClickListener(this);
 
         handleDatePicker();
 
@@ -64,14 +54,6 @@ public class AddHomePostFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        String[] genderList = getResources().getStringArray(R.array.preferenceGenderList);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(requireContext(), R.layout.dropdown_item, genderList);
-        binding.genderEntry.setAdapter(arrayAdapter);
     }
 
     private void handleDatePicker(){
@@ -102,5 +84,19 @@ public class AddHomePostFragment extends Fragment {
                 dateEditText.setText(materialDatePicker.getHeaderText());
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.createBtn:
+                //TODO: need inputs checking
+                addHomePostViewModel.createPost(binding.titleEntry.getText().toString(), binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), R.drawable.apart1);
+                getActivity().finish();
+                break;
+
+            default:
+                break;
+        }
     }
 }

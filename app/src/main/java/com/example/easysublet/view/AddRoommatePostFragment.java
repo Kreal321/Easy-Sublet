@@ -16,7 +16,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.easysublet.R;
 import com.example.easysublet.databinding.FragmentAddRoommatePostBinding;
-import com.example.easysublet.viewmodel.AddPostViewModel;
+import com.example.easysublet.model.RoommatePost;
+import com.example.easysublet.viewmodel.AddHomePostViewModel;
+import com.example.easysublet.viewmodel.AddRoommatePostViewModel;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -26,24 +28,23 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-public class AddRoommatePostFragment extends Fragment {
+public class AddRoommatePostFragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG = "FindRoommatesFragment";
     private FragmentAddRoommatePostBinding binding;
+    private AddRoommatePostViewModel addRoommatePostViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         Log.d(TAG, "onCreateView() is called");
 
-        AddPostViewModel addPostViewModel =
-                new ViewModelProvider(requireActivity()).get(AddPostViewModel.class);
+        addRoommatePostViewModel = new ViewModelProvider(requireActivity()).get(AddRoommatePostViewModel.class);
 
         binding = FragmentAddRoommatePostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.text;
-        addPostViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        binding.createBtn.setOnClickListener(this);
 
         handleDatePicker();
 
@@ -54,14 +55,6 @@ public class AddRoommatePostFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        String[] genderList = getResources().getStringArray(R.array.genderList);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(requireContext(), R.layout.dropdown_item, genderList);
-        binding.genderEntry.setAdapter(arrayAdapter);
     }
 
     private void handleDatePicker() {
@@ -94,6 +87,20 @@ public class AddRoommatePostFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.createBtn:
+                //TODO: need inputs checking
+                addRoommatePostViewModel.createPost(binding.titleEntry.getText().toString(), binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), R.drawable.apart1);
+                getActivity().finish();
+                break;
+
+            default:
+                break;
+        }
     }
 
 }

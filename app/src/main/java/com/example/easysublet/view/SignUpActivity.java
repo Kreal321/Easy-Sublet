@@ -80,7 +80,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void finish() {
-        Log.d(TAG, "onCreate() is called");
+        Log.d(TAG, "finish() is called");
         Intent data = new Intent();
         data.putExtra("message", message);
         data.putExtra("email", binding.emailEntry.getText().toString());

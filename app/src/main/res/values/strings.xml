@@ -12,46 +12,42 @@
     <string name="username">Username</string>>
     <string name="old_pw">Old Password</string>
     <string name="new_pw">New Password</string>
-    <string name="confirm_pw">Comfirm Password</string>
+    <string name="confirm_pw">Confirm Password</string>
     <string name="setting">Settings</string>
     <string name="change_pw">Change Password</string>
     <string name="delete_acc">Delete Account</string>
     <string name="confirm">Confirm</string>
     <string name="map_button">Map Button</string>
     <string name="image_description">This is an image</string>
-    <string name="address">Address</string>
     <string name="required">Required*</string>
+    <string name="address">Address</string>
     <string name="time_period">Time Period</string>
     <string name="rent">Rent per Month</string>
-    <string name="expected_area">Expected Area</string>
-    <string name="expected_rent">Expected Rent per Month</string>
-    <string name="expected_time_period">Expected Time Period</string>
+    <string name="bathroom">Bathroom</string>
+    <string name="bedroom">Bedroom</string>
     <string name="post">Post</string>
+    <string name="contact">Contact Phone / Email</string>
     <string name="more_info">Provide more information...</string>
     <string name="add_photo_des">Click to add photo for the post</string>
+    <string name="preference_of_gender">Preference of Gender</string>
+    <string name="pet">Pet Friendly</string>
+    <string name="furnished">Furnished</string>
+
+
+    <string name="preferred_address">Preferred Area</string>
+    <string name="preferred_period">Approximate Time Period</string>
+    <string name="preferred_rent">Preferred Rent Per Month</string>
+    <string name="preferred_bathroom">Bathroom Num</string>
+    <string name="preferred_bedroom">Bedroom Num</string>
+    <string name="preferred_pet">Has a Pet</string>
+    <string name="preferred_furnished">Require Furnished</string>
+
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
     <string name="cancel">Cancel</string>
     <string name="title">Title</string>
-    <string name="contact">Phone Number</string>
-    <string name="bathroom">Bathroom</string>
-    <string name="bedroom">Bedroom</string>
-    <string name="preference_of_gender">Preference of Gender</string>
-    <string name="gender">Gender</string>
-    <string-array name="preferenceGenderList">
-        <item>Female</item>
-        <item>Male</item>
-        <item>No-preference</item>
-    </string-array>
-    <string-array name="genderList">
-        <item>Female</item>
-        <item>Male</item>
-        <item>Prefer not to say</item>
-    </string-array>
-    <string name="pet">Pet Friendly</string>
-    <string name="furnished">Furnished</string>
+
     <string name="withPet">With Pet</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="find_home">Find Home</string>
     <string name="find_roommate">Find Roommates</string>
     <string name="profile">Profile</string>

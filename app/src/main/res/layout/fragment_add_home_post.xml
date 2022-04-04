@@ -78,6 +78,7 @@
             app:layout_constraintTop_toBottomOf="@id/tilAddressEntry">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/timeEntry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/time_period"
@@ -132,7 +133,7 @@
             app:endIconDrawable="@drawable/ic_action_cancel">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/contactEntry"
-                android:inputType="phone"
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"/>
@@ -149,8 +150,8 @@
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilContactEntry"
-            >
+            app:layout_constraintTop_toBottomOf="@id/tilContactEntry">
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilBathroomEntry"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -196,7 +197,7 @@
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/tilGenderEntry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -208,13 +209,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/llRoomNumber">
-            <AutoCompleteTextView
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/genderEntry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none"
-                >
-            </AutoCompleteTextView>
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -309,21 +308,6 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
             android:text="@string/post" />
-
-
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

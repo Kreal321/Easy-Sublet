@@ -17,6 +17,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +31,7 @@ import java.util.List;
 
 public class AddPostActivity extends AppCompatActivity {
 
+    private static final String TAG = "AddPostActivity";
     private ActivityAddPostBinding binding;
 
     public static Intent newIntent(Context packageContext, int idx){
@@ -89,6 +92,15 @@ public class AddPostActivity extends AppCompatActivity {
         public int getCount() {
             return fragments.size();
         }
+    }
+
+    @Override
+    public void finish() {
+        Log.d(TAG, "finish() is called");
+        Intent data = new Intent();
+        setResult(RESULT_OK, data);
+
+        super.finish();
     }
 }
 
