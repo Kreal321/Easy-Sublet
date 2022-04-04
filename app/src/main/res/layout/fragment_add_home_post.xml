@@ -28,7 +28,7 @@
             app:endIconDrawable="@drawable/ic_action_cancel">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/titleEntry"
-                android:inputType="textPostalAddress"
+                android:inputType="textLongMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"/>
