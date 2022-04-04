@@ -25,7 +25,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintVertical_bias="0.038"
+        android:shadowColor="@color/gray"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="20"/>
 
     <EditText
         android:id="@+id/usernameEntry"
@@ -33,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/get_start_header"
         android:layout_margin="20dp"
-        android:background="#70ffffff"
+        android:background="@color/tran_gray"
         android:drawableStart="@drawable/ic_baseline_person_outline_24"
         android:drawablePadding="20dp"
         android:ems="10"
@@ -56,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/usernameEntry"
         android:layout_margin="20dp"
-        android:background="#70ffffff"
+        android:background="@color/tran_gray"
         android:drawableStart="@drawable/ic_baseline_person_outline_24"
         android:drawablePadding="20dp"
         android:ems="10"
@@ -78,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/emailEntry"
         android:layout_margin="20dp"
-        android:background="#70ffffff"
+        android:background="@color/tran_gray"
         android:drawableStart="@drawable/ic_baseline_lock_24"
         android:drawablePadding="20dp"
         android:ems="10"
@@ -99,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordEntry"
         android:layout_margin="20dp"
-        android:background="#70ffffff"
+        android:background="@color/tran_gray"
         android:drawableStart="@drawable/ic_baseline_lock_24"
         android:drawablePadding="20dp"
         android:ems="10"

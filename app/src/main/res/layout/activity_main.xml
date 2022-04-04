@@ -16,7 +16,11 @@
         android:text="@string/hello"
         android:textColor="@color/white"
         android:textSize="35sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:shadowColor="@color/gray"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="20" />
 
     <EditText
         android:id="@+id/emailEntry"
@@ -24,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_below="@+id/hello"
-        android:background="#70ffffff"
+        android:background="@color/tran_gray"
         android:drawableStart="@drawable/ic_baseline_person_outline_24"
         android:drawablePadding="20dp"
         android:ems="10"
@@ -41,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_below="@+id/emailEntry"
-        android:background="#70ffffff"
+        android:background="@color/tran_gray"
         android:drawableStart="@drawable/ic_baseline_lock_24"
         android:drawablePadding="20dp"
         android:ems="10"
@@ -77,14 +81,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sign_up_question"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:shadowColor="@color/gray"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="20" />
         <Button
             android:id="@+id/signUpBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:text="@string/sign_up"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:shadowColor="@color/gray"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="20"/>
 
     </LinearLayout>
 
