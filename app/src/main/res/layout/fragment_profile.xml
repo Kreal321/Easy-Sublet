@@ -11,32 +11,110 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/teal_700"
-            android:padding="20dp">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/welcome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="Welcome"
-                android:layout_above="@+id/username"
-                android:includeFontPadding="false"
-                android:textSize="12sp"
-                android:textColor="@color/browser_actions_bg_grey"/>
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="Walter's Profile"
+                app:titleCentered="true"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
 
-            <TextView
-                android:id="@+id/username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="Walter"
-                android:textSize="24sp" />
+        </com.google.android.material.appbar.AppBarLayout>
 
-        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:paddingTop="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="125dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/main_lighter"
+                app:cardElevation="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="18dp">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_home"
+                        android:layout_centerHorizontal="true"/>
+
+                    <TextView
+                        android:id="@+id/HomePostNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="123"
+                        android:includeFontPadding="false"
+                        android:textSize="25sp"
+                        android:layout_centerInParent="true"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Home Post"
+                        android:includeFontPadding="false"
+                        android:textSize="12sp"
+                        android:layout_centerInParent="true"
+                        android:layout_below="@+id/HomePostNum"/>
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="125dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/main_lighter"
+                app:cardElevation="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="18dp">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_people"
+                        android:layout_centerHorizontal="true"/>
+
+                    <TextView
+                        android:id="@+id/RoommatePostNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="123"
+                        android:includeFontPadding="false"
+                        android:textSize="25sp"
+                        android:layout_centerInParent="true"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Roommate Post"
+                        android:includeFontPadding="false"
+                        android:textSize="12sp"
+                        android:layout_centerInParent="true"
+                        android:layout_below="@+id/RoommatePostNum"/>
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,7 +127,8 @@
                 android:layout_height="wrap_content"
                 android:hint="User Name"
                 app:startIconDrawable="@drawable/ic_person"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                app:boxBackgroundColor="@color/main_lighter">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/usernameEntry"
@@ -65,7 +144,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Email"
                 app:startIconDrawable="@drawable/ic_email"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                app:boxBackgroundColor="@color/main_lighter">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailEntry"
@@ -99,7 +179,8 @@
                 android:hint="Old Password"
                 app:startIconDrawable="@drawable/ic_lock"
                 app:endIconMode="password_toggle"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                app:boxBackgroundColor="@color/main_lighter">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/oldPasswordEntry"
@@ -116,7 +197,8 @@
                 android:hint="New Password"
                 app:startIconDrawable="@drawable/ic_lock"
                 app:endIconMode="password_toggle"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                app:boxBackgroundColor="@color/main_lighter">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/newPasswordEntry"
@@ -133,7 +215,8 @@
                 android:hint="Confirm Password"
                 app:startIconDrawable="@drawable/ic_lock"
                 app:endIconMode="password_toggle"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                app:boxBackgroundColor="@color/main_lighter">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/confirmPasswordEntry"

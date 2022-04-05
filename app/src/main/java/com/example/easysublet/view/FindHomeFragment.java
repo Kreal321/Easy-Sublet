@@ -47,11 +47,8 @@ public class FindHomeFragment extends Fragment implements View.OnClickListener {
         binding = FragmentFindHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        findHomeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
         binding.addPostBtn.setOnClickListener(this);
-        binding.mapButton.setOnClickListener(this);
+        //binding.mapButton.setOnClickListener(this);
 
         recyclerView = binding.recyclerView;
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
@@ -76,9 +73,9 @@ public class FindHomeFragment extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity().getApplicationContext(), "Add post", Toast.LENGTH_LONG).show();
                 break;
 
-            case R.id.map_button:
-                startActivity(new Intent(getActivity(), MapActivity.class));
-                break;
+//            case R.id.map_button:
+//                startActivity(new Intent(getActivity(), MapActivity.class));
+//                break;
 
             default:
                 break;

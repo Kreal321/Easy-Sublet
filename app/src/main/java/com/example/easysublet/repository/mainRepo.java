@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class mainRepo {
 
@@ -162,6 +163,16 @@ public class mainRepo {
     public static RoommatePost getRoommatePost(String idx) {
         List<RoommatePost> list = getRoommatePostList();
         return list.stream().filter(RoommatePost -> idx.equals(RoommatePost.getIndex())).findFirst().orElse(null);
+    }
+
+    public static List<HomePost> getSearchedHomePostList(String title) {
+        List<HomePost> list = getHomePostList();
+        return list.stream().filter(HomePost -> title.equals(HomePost.getIndex())).collect(Collectors.toList());
+    }
+
+    public static List<RoommatePost> getSearchedRoommatePostList(String title) {
+        List<RoommatePost> list = getRoommatePostList();
+        return list.stream().filter(RoommatePost -> title.equals(RoommatePost.getIndex())).collect(Collectors.toList());
     }
 
 }

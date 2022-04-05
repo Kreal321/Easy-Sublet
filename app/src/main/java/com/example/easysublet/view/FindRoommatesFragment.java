@@ -49,11 +49,9 @@ public class FindRoommatesFragment extends Fragment implements View.OnClickListe
         binding = FragmentFindRoommatesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        findRoommatesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         binding.addPostBtn.setOnClickListener(this);
-        binding.mapButton.setOnClickListener(this);
+//        binding.mapButton.setOnClickListener(this);
 
 
         recyclerView = binding.recyclerView;
@@ -79,9 +77,9 @@ public class FindRoommatesFragment extends Fragment implements View.OnClickListe
                 Toast.makeText(getActivity().getApplicationContext(), "Add post", Toast.LENGTH_LONG).show();
                 break;
 
-            case R.id.map_button:
-                startActivity(new Intent(getActivity(), MapActivity.class));
-                break;
+//            case R.id.map_button:
+//                startActivity(new Intent(getActivity(), MapActivity.class));
+//                break;
 
             default:
                 break;
