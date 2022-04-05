@@ -23,8 +23,8 @@
     <string name="address">Address</string>
     <string name="time_period">Time Period</string>
     <string name="rent">Rent per Month</string>
-    <string name="bathroom">Bathroom</string>
-    <string name="bedroom">Bedroom</string>
+    <string name="bathroom">Bathroom Num</string>
+    <string name="bedroom">Bedroom Num</string>
     <string name="post">Post</string>
     <string name="contact">Contact Phone / Email</string>
     <string name="gender">Gender</string>
