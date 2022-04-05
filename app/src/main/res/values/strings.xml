@@ -27,7 +27,9 @@
     <string name="bedroom">Bedroom</string>
     <string name="post">Post</string>
     <string name="contact">Contact Phone / Email</string>
+    <string name="gender">Gender</string>
     <string name="more_info">Provide more information...</string>
+    <string name="other_info">Additional information...</string>
     <string name="add_photo_des">Click to add photo for the post</string>
     <string name="preference_of_gender">Preference of Gender</string>
     <string name="pet">Pet Friendly</string>

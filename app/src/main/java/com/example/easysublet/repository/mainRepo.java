@@ -117,7 +117,7 @@ public class mainRepo {
 
     public static List<HomePost> getHomePostList() {
         List<HomePost> list = new ArrayList<>();
-        list.add(new HomePost("1", "Walter", R.drawable.apart1, "This is post 1", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
+        list.add(new HomePost("1", "Walter", R.drawable.apart1, "This is post 1", true,"Jean Baptiste Point du Sable Lake Shore Drive", "walter@hotmail.com", 2,2, true, "no preference", true, 800, "2022-03-21", "One of my roommate feed a cat."));
         list.add(new HomePost("2","Walter", R.drawable.apart2, "This is post 2", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
         list.add(new HomePost("3", "Walter", R.drawable.house1, "This is post 3", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
         list.add(new HomePost("4", "Walter", R.drawable.house2, "This is post 4", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));

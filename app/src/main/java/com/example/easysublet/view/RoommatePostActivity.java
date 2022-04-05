@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -41,6 +42,20 @@ public class RoommatePostActivity extends AppCompatActivity {
             public void onChanged(RoommatePost roommatePost) {
                 binding.title.setText(roommatePost.getTitle());
                 binding.image.setImageResource(roommatePost.getImage());
+                binding.address.setText(roommatePost.getAddress());
+                binding.timePeriod.setText(roommatePost.getTime());
+                binding.rent.setText(Integer.toString(roommatePost.getRent()));
+                binding.bedroomNum.setText(Integer.toString(roommatePost.getBedroomNum()));
+                binding.bathroomNum.setText(Integer.toString(roommatePost.getBathroomNum()));
+                binding.furnished.setText(roommatePost.isFurnished()?"✓":"✗");
+                binding.pet.setText(roommatePost.getPet()?"✓":"✗");
+                binding.gender.setText(roommatePost.getGender());
+                binding.contact.setText(roommatePost.getContact());
+                if (roommatePost.getOther() == null || roommatePost.getOther().length() == 0) {
+                    binding.llOther.setVisibility(View.INVISIBLE);
+                } else {
+                    binding.other.setText(roommatePost.getOther());
+                }
             }
         });
 
