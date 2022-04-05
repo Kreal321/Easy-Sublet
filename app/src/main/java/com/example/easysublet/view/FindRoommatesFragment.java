@@ -3,6 +3,8 @@ package com.example.easysublet.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -51,14 +54,37 @@ public class FindRoommatesFragment extends Fragment implements View.OnClickListe
 
 
         binding.addPostBtn.setOnClickListener(this);
+        binding.searchBtn.setOnClickListener(this);
 //        binding.mapButton.setOnClickListener(this);
 
+        binding.searchEntry.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        recyclerView = binding.recyclerView;
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        List<RoommatePost> list = mainRepo.getRoommatePostList();
-        postAdapter = new PostAdapter(root.getContext(), list);
-        recyclerView.setAdapter(postAdapter);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(charSequence.length() == 0){
+                    findRoommatesViewModel.getFilteredPostList("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        findRoommatesViewModel.getPostList().observe(getViewLifecycleOwner(), new Observer<List<RoommatePost>>() {
+            @Override
+            public void onChanged(List<RoommatePost> roommatePosts) {
+                recyclerView = binding.recyclerView;
+                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                postAdapter = new PostAdapter(root.getContext(), roommatePosts);
+                recyclerView.setAdapter(postAdapter);
+            }
+        });
 
         return root;
     }
@@ -75,6 +101,11 @@ public class FindRoommatesFragment extends Fragment implements View.OnClickListe
             case R.id.addPostBtn:
                 startActivity(AddPostActivity.newIntent(getActivity(), 1));
                 Toast.makeText(getActivity().getApplicationContext(), "Add post", Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.searchBtn:
+                findRoommatesViewModel.getFilteredPostList(binding.searchEntry.getText().toString());
+
                 break;
 
 //            case R.id.map_button:

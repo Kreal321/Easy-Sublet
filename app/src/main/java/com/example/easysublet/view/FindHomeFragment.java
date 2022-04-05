@@ -3,6 +3,8 @@ package com.example.easysublet.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -48,13 +51,37 @@ public class FindHomeFragment extends Fragment implements View.OnClickListener {
         View root = binding.getRoot();
 
         binding.addPostBtn.setOnClickListener(this);
+        binding.searchBtn.setOnClickListener(this);
         //binding.mapButton.setOnClickListener(this);
 
-        recyclerView = binding.recyclerView;
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        List<HomePost> list = mainRepo.getHomePostList();
-        postAdapter = new PostAdapter(getActivity(), list);
-        recyclerView.setAdapter(postAdapter);
+        binding.searchEntry.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(charSequence.length() == 0){
+                    findHomeViewModel.getFilteredPostList("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        findHomeViewModel.getPostList().observe(getViewLifecycleOwner(), new Observer<List<HomePost>>() {
+            @Override
+            public void onChanged(List<HomePost> homePosts) {
+                recyclerView = binding.recyclerView;
+                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                postAdapter = new FindHomeFragment.PostAdapter(root.getContext(), homePosts);
+                recyclerView.setAdapter(postAdapter);
+            }
+        });
 
         return root;
     }
@@ -71,6 +98,11 @@ public class FindHomeFragment extends Fragment implements View.OnClickListener {
             case R.id.addPostBtn:
                 startActivity(AddPostActivity.newIntent(getActivity(), 0));
                 Toast.makeText(getActivity().getApplicationContext(), "Add post", Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.searchBtn:
+                findHomeViewModel.getFilteredPostList(binding.searchEntry.getText().toString());
+
                 break;
 
 //            case R.id.map_button:

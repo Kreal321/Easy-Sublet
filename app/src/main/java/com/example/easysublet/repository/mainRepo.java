@@ -167,12 +167,14 @@ public class mainRepo {
 
     public static List<HomePost> getSearchedHomePostList(String title) {
         List<HomePost> list = getHomePostList();
-        return list.stream().filter(HomePost -> title.equals(HomePost.getIndex())).collect(Collectors.toList());
+        if(title.length() == 0) return list;
+        return list.stream().filter(HomePost -> HomePost.getTitle().contains(title)).collect(Collectors.toList());
     }
 
     public static List<RoommatePost> getSearchedRoommatePostList(String title) {
         List<RoommatePost> list = getRoommatePostList();
-        return list.stream().filter(RoommatePost -> title.equals(RoommatePost.getIndex())).collect(Collectors.toList());
+        if(title.length() == 0) return list;
+        return list.stream().filter(RoommatePost -> RoommatePost.getTitle().contains(title)).collect(Collectors.toList());
     }
 
 }
