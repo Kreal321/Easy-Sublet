@@ -10,16 +10,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.easysublet.R;
 import com.example.easysublet.databinding.ActivityRoommatePostBinding;
 import com.example.easysublet.model.RoommatePost;
 import com.example.easysublet.viewmodel.RoommatePostViewModel;
 
-public class RoommatePostActivity extends AppCompatActivity {
+public class RoommatePostActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "RoommatePostActivity";
 
     private RoommatePostViewModel roommatePostViewModel;
     private ActivityRoommatePostBinding binding;
+    private String postIdx;
 
     public static Intent newIntent(Context packageContext, String idx){
         Intent intent = new Intent(packageContext, RoommatePostActivity.class);
@@ -56,10 +58,24 @@ public class RoommatePostActivity extends AppCompatActivity {
                 } else {
                     binding.other.setText(roommatePost.getOther());
                 }
+                postIdx = roommatePost.getIndex();
             }
         });
 
         roommatePostViewModel.setPost(getIntent().getStringExtra("idx"));
 
+        binding.editBtn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.editBtn:
+                startActivity(EditRoommatePostActivity.newIntent(this, postIdx));
+                break;
+
+            default:
+                break;
+        }
     }
 }

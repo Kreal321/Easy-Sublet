@@ -342,11 +342,20 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/editBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llOther"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="5dp"
+            android:text="Edit Post" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:layout_below="@id/llOther"
+            android:layout_below="@id/editBtn"
             android:layout_marginTop="20dp"/>
 
 

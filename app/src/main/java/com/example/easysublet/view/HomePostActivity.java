@@ -10,17 +10,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.easysublet.R;
 import com.example.easysublet.databinding.ActivityHomePostBinding;
 import com.example.easysublet.model.HomePost;
 import com.example.easysublet.model.RoommatePost;
 import com.example.easysublet.viewmodel.HomePostViewModel;
 
-public class HomePostActivity extends AppCompatActivity {
+public class HomePostActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "HomePostActivity";
 
     private HomePostViewModel homePostViewModel;
     private ActivityHomePostBinding binding;
+    private String postIdx;
 
     public static Intent newIntent(Context packageContext, String idx){
         Intent intent = new Intent(packageContext, HomePostActivity.class);
@@ -57,10 +59,25 @@ public class HomePostActivity extends AppCompatActivity {
                 } else {
                     binding.other.setText(homePost.getOther());
                 }
+                postIdx = homePost.getIndex();
             }
         });
 
         homePostViewModel.setPost(getIntent().getStringExtra("idx"));
 
+        binding.editBtn.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.editBtn:
+                startActivity(EditHomePostActivity.newIntent(this, postIdx));
+                break;
+
+            default:
+                break;
+        }
     }
 }
