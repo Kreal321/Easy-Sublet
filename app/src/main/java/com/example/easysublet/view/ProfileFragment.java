@@ -44,6 +44,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         binding.changePwBtn.setOnClickListener(this);
         binding.deleteAccountBtn.setOnClickListener(this);
         binding.logoutBtn.setOnClickListener(this);
+        binding.roommatePostCard.setOnClickListener(this);
+        binding.homePostCard.setOnClickListener(this);
 
         return root;
     }
@@ -57,6 +59,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.homePostCard:
+                startActivity(MyPostActivity.newIntent(getActivity(), 0));
+                break;
+
+            case R.id.roommatePostCard:
+                startActivity(MyPostActivity.newIntent(getActivity(), 1));
+                break;
+
             case R.id.updateInfoBtn:
                 profileViewModel.updateInfo(binding.usernameEntry.getText().toString(), binding.emailEntry.getText().toString());
                 break;

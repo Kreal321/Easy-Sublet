@@ -24,6 +24,11 @@
             android:label="@string/title_activity_add_post"
             android:theme="@style/Theme.EasySublet.NoActionBar" />
         <activity
+            android:name=".view.MyPostActivity"
+            android:exported="false"
+            android:label="@string/title_activity_add_post"
+            android:theme="@style/Theme.EasySublet.NoActionBar" />
+        <activity
             android:name=".view.EditHomePostActivity"
             android:exported="false" />
         <activity
