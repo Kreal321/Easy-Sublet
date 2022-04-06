@@ -2,6 +2,7 @@ package com.example.easysublet.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -22,6 +23,7 @@ public class MyPostActivity extends AppCompatActivity {
 
     private static final String TAG = "AddPostActivity";
     private ActivityMyPostBinding binding;
+    private SharedPreferences currentUser;
 
     public static Intent newIntent(Context packageContext, int idx){
         Intent intent = new Intent(packageContext, MyPostActivity.class);
@@ -51,6 +53,9 @@ public class MyPostActivity extends AppCompatActivity {
 
         int index = getIntent().getIntExtra("idx", 0);
         tabs.getTabAt(index).select();
+
+        currentUser = getSharedPreferences("user" ,Context.MODE_PRIVATE);
+
     }
 
     private class SectionsPagerAdapter extends FragmentPagerAdapter {

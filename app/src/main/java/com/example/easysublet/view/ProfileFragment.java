@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -26,14 +27,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     private FragmentProfileBinding binding;
     private ProfileViewModel profileViewModel;
     private static final String TAG = "ProfileFragment";
+    private SharedPreferences currentUser;
+    private String username;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
 
-        SharedPreferences emailStored = getActivity().getSharedPreferences("email",Context.MODE_PRIVATE);
-        String email = emailStored.getString("email",null);
+        currentUser = getActivity().getSharedPreferences("user" ,Context.MODE_PRIVATE);
+        String email = currentUser.getString("email",null);
         Log.d(TAG, "onCreateView() is called. User email: " + email);
         profileViewModel.setUser(email);
 
@@ -46,6 +49,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         binding.logoutBtn.setOnClickListener(this);
         binding.roommatePostCard.setOnClickListener(this);
         binding.homePostCard.setOnClickListener(this);
+
+        username = currentUser.getString("username", null);
+        binding.usernameEntry.setText(username);
+        binding.emailEntry.setText(currentUser.getString("email", null));
+
+        binding.topAppBar.setTitle(username + "'s Profile");
 
         return root;
     }
@@ -101,9 +110,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.logoutBtn:
-                Intent broadcastIntent = new Intent();
-                broadcastIntent.setAction("ACTION_LOGOUT");
-                getActivity().sendBroadcast(broadcastIntent);
+                getActivity().finish();
 
                 break;
 

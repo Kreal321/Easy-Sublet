@@ -82,9 +82,10 @@ public class mainRepo {
                     if(user == null || !email.equals(user.getEmail())||!user.passwordIsCorrect(pass)) {
                         user = null;
                     }else {
-                        SharedPreferences sharedPref = application.getSharedPreferences("email",Context.MODE_PRIVATE);
+                        SharedPreferences sharedPref = application.getSharedPreferences("user", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putString("email",email);
+                        editor.putString("email", email);
+                        editor.putString("username", "testuser");
                         editor.apply();
                         editor.commit();
                     }
@@ -119,10 +120,10 @@ public class mainRepo {
         List<HomePost> list = new ArrayList<>();
         list.add(new HomePost("1", "Walter", R.drawable.apart1, "This is post 1", true,"Jean Baptiste Point du Sable Lake Shore Drive", "walter@hotmail.com", 2,2, true, "no preference", true, 800, "2022-03-21", "One of my roommate feed a cat."));
         list.add(new HomePost("2","Sam", R.drawable.apart2, "This is post 2", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new HomePost("3", "Test user", R.drawable.house1, "This is post 3", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
+        list.add(new HomePost("3", "testuser", R.drawable.house1, "This is post 3", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
         list.add(new HomePost("4", "Test user", R.drawable.house2, "This is post 4", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
         list.add(new HomePost("5","Test user", R.drawable.house3, "This is post 5", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new HomePost("6","Test user", R.drawable.apart1, "This is post 6", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
+        list.add(new HomePost("6","testuser", R.drawable.apart1, "This is post 6", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
         list.add(new HomePost("7","Test user", R.drawable.apart2, "This is post 7", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
         list.add(new HomePost("8","Test user", R.drawable.house1, "This is post 8", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
         list.add(new HomePost("9","Test user", R.drawable.house2, "This is post 9", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
@@ -147,11 +148,11 @@ public class mainRepo {
         list.add(new RoommatePost("3", "Test user", R.drawable.house1, "This is post 3", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
         list.add(new RoommatePost("5","Test user", R.drawable.house3, "This is post 5", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
         list.add(new RoommatePost("4", "Test user", R.drawable.house2, "This is post 4", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("6","Test user", R.drawable.apart1, "This is post 6", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
+        list.add(new RoommatePost("6","testuser", R.drawable.house1, "This is post 6", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
         list.add(new RoommatePost("7","Test user", R.drawable.apart2, "This is post 7", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("8","Test user", R.drawable.house1, "This is post 8", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
+        list.add(new RoommatePost("8","Test user", R.drawable.apart1, "This is post 8", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
         list.add(new RoommatePost("9","Test user", R.drawable.house2, "This is post 9", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("10","Test user", R.drawable.house3, "This is post 10", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
+        list.add(new RoommatePost("10","testuser", R.drawable.house3, "This is post 10", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
         list.add(new RoommatePost("11","Test user", R.drawable.apart1, "This is post 11", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
         list.add(new RoommatePost("12","Test user", R.drawable.apart2, "This is post 12", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
         list.add(new RoommatePost("13","Test user", R.drawable.house1, "This is post 13", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));

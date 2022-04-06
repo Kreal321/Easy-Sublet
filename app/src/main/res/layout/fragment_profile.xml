@@ -19,7 +19,7 @@
                 android:id="@+id/topAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:title="Walter's Profile"
+                app:title="Profile"
                 app:titleCentered="true"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
 
@@ -135,8 +135,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/usernameEntry"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Walter" />
+                    android:layout_height="wrap_content"/>
 
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -152,8 +151,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailEntry"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="walter@hotmail.com" />
+                    android:layout_height="wrap_content" />
 
 
             </com.google.android.material.textfield.TextInputLayout>

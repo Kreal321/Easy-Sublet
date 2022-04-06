@@ -23,9 +23,8 @@ public class AddHomePostViewModel extends ViewModel {
     }
 
     // TODO: link this to repository
-    public void createPost(String title, String address, String time, int rent, String contact, int bathroomNum, int bedroomNum, String gender, boolean pet, boolean furnished, String other, int image) {
+    public void createPost(String username, String title, String address, String time, int rent, String contact, int bathroomNum, int bedroomNum, String gender, boolean pet, boolean furnished, String other, int image) {
         String index = "autoFilled";
-        String username = "testuser";
         boolean active = true;
         HomePost newPost = new HomePost(index, username, image, title, active, address, contact, bathroomNum, bedroomNum, furnished, gender, pet, rent, time, other);
         post.setValue(newPost);

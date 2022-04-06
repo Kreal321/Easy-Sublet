@@ -63,5 +63,12 @@ public class NavActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+    @Override
+    public void finish() {
+        Log.d(TAG, "finish() is called");
+        Intent data = new Intent();
+        setResult(RESULT_OK, data);
 
+        super.finish();
+    }
 }

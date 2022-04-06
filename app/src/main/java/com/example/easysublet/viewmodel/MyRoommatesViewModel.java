@@ -14,19 +14,20 @@ import java.util.List;
 public class MyRoommatesViewModel extends ViewModel {
 
     private static final String TAG = "FindRoommatesViewModel";
-    private final MutableLiveData<List<RoommatePost>> postList;
+    private MutableLiveData<List<RoommatePost>> postList;
 
     public MyRoommatesViewModel() {
-        postList = new MutableLiveData<>();
-        postList.setValue(mainRepo.getMyRoommatePostList("Walter"));
+
         Log.d(TAG, "FindRoommatesViewModel() is called");
     }
 
-    public LiveData<List<RoommatePost>> getPostList() {
-        return this.postList;
+    public LiveData<List<RoommatePost>> getPostList(String username) {
+        if (postList == null) {
+            postList = new MutableLiveData<>();
+            postList.setValue(mainRepo.getMyRoommatePostList(username));
+        }
+        return postList;
+
     }
 
-    public void getFilteredPostList(String title) {
-        postList.setValue(mainRepo.getSearchedRoommatePostList(title));
-    }
 }

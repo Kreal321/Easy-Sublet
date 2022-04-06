@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.easysublet.model.HomePost;
+import com.example.easysublet.model.RoommatePost;
 import com.example.easysublet.repository.mainRepo;
 
 import java.util.List;
@@ -14,19 +15,20 @@ import java.util.List;
 public class MyHomeViewModel extends ViewModel {
 
     private static final String TAG = "FindHomeViewModel";
-    private final MutableLiveData<List<HomePost>> postList;
+    private MutableLiveData<List<HomePost>> postList;
 
     public MyHomeViewModel() {
-        postList = new MutableLiveData<>();
-        postList.setValue(mainRepo.getMyHomePostList("Walter"));
         Log.d(TAG, "FindRoommatesViewModel() is called");
     }
 
-    public LiveData<List<HomePost>> getPostList() {
-        return this.postList;
+    public LiveData<List<HomePost>> getPostList(String username) {
+        if (postList == null) {
+            postList = new MutableLiveData<>();
+            postList.setValue(mainRepo.getMyHomePostList(username));
+        }
+        return postList;
+
     }
 
-    public void getFilteredPostList(String title) {
-        postList.setValue(mainRepo.getSearchedHomePostList(title));
-    }
+
 }

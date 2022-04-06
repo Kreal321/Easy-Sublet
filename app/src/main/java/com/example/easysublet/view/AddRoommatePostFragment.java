@@ -1,6 +1,12 @@
 package com.example.easysublet.view;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -33,6 +40,10 @@ public class AddRoommatePostFragment extends Fragment implements View.OnClickLis
     private static final String TAG = "FindRoommatesFragment";
     private FragmentAddRoommatePostBinding binding;
     private AddRoommatePostViewModel addRoommatePostViewModel;
+    private SharedPreferences currentUser;
+    private String imagePath;
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,10 +52,13 @@ public class AddRoommatePostFragment extends Fragment implements View.OnClickLis
 
         addRoommatePostViewModel = new ViewModelProvider(requireActivity()).get(AddRoommatePostViewModel.class);
 
+        currentUser = getActivity().getSharedPreferences("user" , Context.MODE_PRIVATE);
+
         binding = FragmentAddRoommatePostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         binding.createBtn.setOnClickListener(this);
+        binding.postPhoto.setOnClickListener(this);
 
         handleDatePicker();
 
@@ -90,12 +104,29 @@ public class AddRoommatePostFragment extends Fragment implements View.OnClickLis
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK && data != null) {
+            binding.postPhoto.setImageURI(data.getData());
+            imagePath = data.getData().getPath();
+            Log.d(TAG, "onActivityResult: " + imagePath);
+
+        }
+
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.createBtn:
                 //TODO: need inputs checking
-                addRoommatePostViewModel.createPost(binding.titleEntry.getText().toString(), binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), R.drawable.apart1);
+                addRoommatePostViewModel.createPost(currentUser.getString("username", null), binding.titleEntry.getText().toString(), binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), R.drawable.apart1);
                 getActivity().finish();
+                break;
+
+            case R.id.postPhoto:
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 3);
                 break;
 
             default:

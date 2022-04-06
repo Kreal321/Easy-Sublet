@@ -1,6 +1,7 @@
 package com.example.easysublet.view;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -36,6 +37,8 @@ public class MyRoommatesFragment extends Fragment implements View.OnClickListene
     private FragmentMyRoommatesBinding binding;
     private RecyclerView recyclerView;
     private PostAdapter postAdapter;
+    private SharedPreferences currentUser;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -47,10 +50,12 @@ public class MyRoommatesFragment extends Fragment implements View.OnClickListene
         binding = FragmentMyRoommatesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        currentUser = getActivity().getSharedPreferences("user" ,Context.MODE_PRIVATE);
+
 
         binding.addPostBtn.setOnClickListener(this);
 
-        myRoommatesViewModel.getPostList().observe(getViewLifecycleOwner(), new Observer<List<RoommatePost>>() {
+        myRoommatesViewModel.getPostList(currentUser.getString("username", null)).observe(getViewLifecycleOwner(), new Observer<List<RoommatePost>>() {
             @Override
             public void onChanged(List<RoommatePost> roommatePosts) {
                 recyclerView = binding.recyclerView;
