@@ -114,13 +114,13 @@ public class MyRoommatesFragment extends Fragment implements View.OnClickListene
             //TODO: display image with picasso
             ImageView img = holder.img;
             Picasso.with(getActivity()).load(p.getImage()).into(img);
-            Toast.makeText(getActivity(), "get image succeed!!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "get image succeed!!", Toast.LENGTH_SHORT).show();
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View view) {
                        mContext.startActivity(RoommatePostActivity.newIntent(mContext, p.getIndex()));
-                       Toast.makeText(mContext, "click on post " + p.getIndex(), Toast.LENGTH_SHORT).show();
+//                       Toast.makeText(mContext, "click on post " + p.getIndex(), Toast.LENGTH_SHORT).show();
                    }
                }
             );

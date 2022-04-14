@@ -78,6 +78,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                     binding.usernameEntry.setText(username);
                     binding.emailEntry.setText(user.getEmail());
                     binding.topAppBar.setTitle(user.getUsername() + "'s Profile");
+                    binding.usernameEntry.setText(user.getUsername());
                 }
             }
         });

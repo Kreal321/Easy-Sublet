@@ -75,7 +75,7 @@ public class EditRoommatePostActivity extends AppCompatActivity implements View.
                 //TODO: post photo with picasso
                 ImageView img = binding.postPhoto;
                 Picasso.with(getApplication()).load(roommatePost.getImage()).into(img);
-                Toast.makeText(getApplication(), "get image succeed!!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplication(), "get image succeed!!", Toast.LENGTH_SHORT).show();
 
                 binding.addressEntry.setText(roommatePost.getAddress());
                 binding.timeEntry.setText(roommatePost.getTime());

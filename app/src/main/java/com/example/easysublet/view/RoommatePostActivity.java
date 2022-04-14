@@ -52,7 +52,7 @@ public class RoommatePostActivity extends AppCompatActivity implements View.OnCl
                 //TODO: post photo with picasso
                 ImageView img = binding.image;
                 Picasso.with(getApplication()).load(roommatePost.getImage()).into(img);
-                Toast.makeText(getApplication(), "get image succeed!!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplication(), "get image succeed!!", Toast.LENGTH_SHORT).show();
 
                 binding.address.setText(roommatePost.getAddress());
                 binding.timePeriod.setText(roommatePost.getTime());

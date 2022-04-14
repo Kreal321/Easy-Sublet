@@ -109,13 +109,13 @@ public class MyHomeFragment extends Fragment implements View.OnClickListener {
             //TODO: post photo with picasso
             ImageView img = holder.img;
             Picasso.with(getContext()).load(p.getImage()).into(img);
-            Toast.makeText(getContext(), "get image succeed!!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), "get image succeed!!", Toast.LENGTH_SHORT).show();
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View view) {
                        mContext.startActivity(HomePostActivity.newIntent(mContext, p.getIndex()));
-                       Toast.makeText(mContext, "click on post " + p.getIndex(), Toast.LENGTH_SHORT).show();
+//                       Toast.makeText(mContext, "click on post " + p.getIndex(), Toast.LENGTH_SHORT).show();
                    }
                }
             );

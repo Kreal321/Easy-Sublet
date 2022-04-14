@@ -72,7 +72,7 @@ public class EditHomePostActivity extends AppCompatActivity implements View.OnCl
                 //TODO: post photo with picasso
                 ImageView img = binding.postPhoto;
                 Picasso.with(getApplication()).load(homePost.getImage()).into(img);
-                Toast.makeText(getApplication(), "get image succeed!!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplication(), "get image succeed!!", Toast.LENGTH_SHORT).show();
 
                 binding.addressEntry.setText(homePost.getAddress());
                 binding.timeEntry.setText(homePost.getTime());
