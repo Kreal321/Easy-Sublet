@@ -3,6 +3,8 @@ package com.example.easysublet.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.easysublet.databinding.ActivityMapBinding;
@@ -13,6 +15,11 @@ public class MapActivity extends AppCompatActivity {
     private static final String TAG = "MapActivity";
     private ActivityMapBinding binding;
     private MapViewModel mapViewModel;
+
+    public static Intent newIntent(Context packageContext){
+        Intent intent = new Intent(packageContext, MapActivity.class);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

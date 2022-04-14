@@ -64,7 +64,8 @@ public class AddHomePostFragment extends Fragment implements View.OnClickListene
         ((TextInputLayout) binding.tilAddressEntry).setEndIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.addressEntry.setText("Auto set Address");
+                startActivity(MapActivity.newIntent(getActivity()));
+//                binding.addressEntry.setText("Auto set Address");
             }
         });
 
