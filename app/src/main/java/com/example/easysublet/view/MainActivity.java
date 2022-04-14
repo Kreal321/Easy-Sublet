@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v){
         String sEmail = binding.emailEntry.getText().toString();
         String sPass = binding.passwordEntry.getText().toString();
+//        Log.d(TAG, "onClick: " + sEmail + sPass);
         //TODO: for text purpose comment out above
 //        String sEmail = "a123@aa.com";
 //        String sPass = "1234567";
