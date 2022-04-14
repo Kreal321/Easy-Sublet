@@ -19,8 +19,14 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class mainRepo {
 
@@ -83,7 +89,7 @@ public class mainRepo {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Log.d("updateDisplayName", "User profile updated.");
-                                        Toast.makeText(application, "set username Failed.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(application, "set username succeed.", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -209,33 +215,46 @@ public class mainRepo {
         });
 
         //TODO: delete related posts
+        //TODO: delete related images in storage
+        myref.child("Home-Post").orderByChild("username").equalTo(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> keyList = new ArrayList<String>();
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        keyList.add(snapshot.getKey());
+                    }
+                    for(String key : keyList){
+                        myref.child("Home-Post").child(key).removeValue();
+                    }
+                }
 
-//        myref.child("Home-Post").orderByChild("username").equalTo(uid).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                List<RoommatePost> roommatePostlist = new ArrayList<RoommatePost>();
-//                if (dataSnapshot.exists()) {
-//                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                        roommatePostlist.add(snapshot.getValue(RoommatePost.class));
-//                    }
-//                }
-//
-//            }
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//
-//        myref.child("Roommate-Post").orderByChild("username").equalTo(uid).addOnCompleteListener(new OnCompleteListener<Void>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//                if (task.isSuccessful()) {
-//                    Log.d("deleteAccount-Post", "User account posts deleted.");
-//                    Toast.makeText(application, "User account posts deleted.", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        myref.child("Roommate-Post").orderByChild("username").equalTo(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> keyList = new ArrayList<String>();
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        keyList.add(snapshot.getKey());
+                    }
+                    for(String key : keyList){
+                        myref.child("Roommate-Post").child(key).removeValue();
+                    }
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         user.delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
