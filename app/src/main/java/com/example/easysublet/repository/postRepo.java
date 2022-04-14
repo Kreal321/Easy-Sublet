@@ -364,13 +364,17 @@ public class postRepo {
 
     public void getSearchedRoommatePostList(String title) {
 
-        myref.child("Roommate-Post").orderByChild("title").equalTo(title).addValueEventListener(new ValueEventListener() {
+        myref.child("Roommate-Post").orderByChild("title").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<RoommatePost> roommatePostlist = new ArrayList<RoommatePost>();
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        roommatePostlist.add(snapshot.getValue(RoommatePost.class));
+                        RoommatePost post = snapshot.getValue(RoommatePost.class);
+                        if (post.getTitle().contains(title)){
+                            roommatePostlist.add(post);
+                        }
+
                     }
                 }
                 mutableLiveRoommatePosts.postValue(roommatePostlist);

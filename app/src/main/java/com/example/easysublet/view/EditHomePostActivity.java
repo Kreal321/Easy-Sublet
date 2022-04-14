@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.Pair;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,7 +23,15 @@ import com.example.easysublet.databinding.ActivityEditHomePostBinding;
 import com.example.easysublet.model.HomePost;
 import com.example.easysublet.viewmodel.EditHomePostViewModel;
 import com.example.easysublet.viewmodel.HomePostViewModel;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.textfield.TextInputLayout;
 import com.squareup.picasso.Picasso;
+
+import java.util.Calendar;
+import java.util.TimeZone;
 
 public class EditHomePostActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -81,6 +91,40 @@ public class EditHomePostActivity extends AppCompatActivity implements View.OnCl
 
         binding.updateBtn.setOnClickListener(this);
         binding.postPhoto.setOnClickListener(this);
+
+        handleDatePicker();
+
+    }
+
+    private void handleDatePicker() {
+
+        TextInputLayout dateTextInput = binding.tilTimePicker;
+        EditText dateEditText = dateTextInput.getEditText();
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        calendar.clear();
+        long today = MaterialDatePicker.todayInUtcMilliseconds();
+
+        CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();
+        constraintsBuilder.setStart(today);
+        constraintsBuilder.setValidator(DateValidatorPointForward.now());
+
+        MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
+        builder.setTitleText("SELECT DATE");
+        builder.setCalendarConstraints(constraintsBuilder.build());
+
+        final MaterialDatePicker<Pair<Long, Long>> materialDatePicker = builder.build();
+        dateEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                materialDatePicker.show(getSupportFragmentManager(),"DATE_PICKER");
+            }
+        });
+        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick(Object selection) {
+                dateEditText.setText(materialDatePicker.getHeaderText());
+            }
+        });
 
     }
 
