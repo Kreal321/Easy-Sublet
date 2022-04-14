@@ -92,4 +92,14 @@ dependencies {
     //Picasso image process
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
+    //NOTE: for mapbox
+    // Replace `DESIRED_JAVA_SDK_PACKAGE` with the name of an available package:
+    // https://docs.mapbox.com/android/java/guides/#available-packages
+    //implementation 'com.mapbox.mapboxsdk:DESIRED_JAVA_SDK_PACKAGE:6.3.0'
+
+//    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:6.3.0'
+//    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.6.0'
+//
+//    implementation 'androidx.annotation:annotation:1.0.0'
+
 }

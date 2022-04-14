@@ -2,6 +2,7 @@ package com.example.easysublet.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -43,6 +44,7 @@ public class EditHomePostActivity extends AppCompatActivity implements View.OnCl
     private MutableLiveData<HomePost> thisPost;
     private String imagePath;
     private Uri imageUri;
+    private boolean changeImage;
 
     public static Intent newIntent(Context packageContext, String idx){
         Intent intent = new Intent(packageContext, EditHomePostActivity.class);
@@ -54,6 +56,8 @@ public class EditHomePostActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         thisPost= new MutableLiveData<HomePost>();
+        changeImage = false;
+
         Log.d(TAG, "onCreate() is called");
 
         homePostViewModel = new ViewModelProvider(this).get(HomePostViewModel.class);
@@ -126,6 +130,7 @@ public class EditHomePostActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
+
     }
 
     @Override
@@ -136,7 +141,21 @@ public class EditHomePostActivity extends AppCompatActivity implements View.OnCl
             imagePath = data.getData().getPath();
             Log.d(TAG, "onActivityResult: " + imagePath);
             imageUri = data.getData();
-
+            if(imageUri!= null && changeImage){
+                Log.d(TAG, "Entered Here 2:");
+                editHomePostViewModel.uploadImage(imageUri);
+                editHomePostViewModel.getUriMutableLiveData().observe(this, new Observer<Uri>() {
+                    @Override
+                    public void onChanged(Uri uri) {
+                        Log.d(TAG, "Entered Here 3:");
+                        SharedPreferences sharedPref = getApplication().getSharedPreferences("uri",Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("uri",uri.toString());
+                        editor.apply();
+                        editor.commit();
+                    }
+                });
+            }
         }
 
     }
@@ -145,12 +164,21 @@ public class EditHomePostActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.updateBtn:
+
                 thisPost.observe(this, new Observer<HomePost>() {
                     @Override
                     public void onChanged(HomePost homePost) {
                         if(homePost != null){
-                            Log.d(TAG, "Entered Here 1:");
-                            editHomePostViewModel.updatePost(homePost.getIndex(),homePost.getUsername(), binding.titleEntry.getText().toString(), homePost.isActive(),binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), homePost.getImage());
+
+                            SharedPreferences uriStored = getSharedPreferences("uri",Context.MODE_PRIVATE);
+                            String uri = uriStored.getString("uri",null);
+                            if(uri!= null && changeImage == true){
+                                Log.d(TAG, "Image changed");
+                                editHomePostViewModel.updatePost(homePost.getIndex(),homePost.getUsername(), binding.titleEntry.getText().toString(), homePost.isActive(),binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), uri);
+                            }else {
+                                Log.d(TAG, "Image no changed "+changeImage);
+                                editHomePostViewModel.updatePost(homePost.getIndex(), homePost.getUsername(), binding.titleEntry.getText().toString(), homePost.isActive(), binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), homePost.getImage());
+                            }
                             finish();
                         }
 
@@ -161,6 +189,7 @@ public class EditHomePostActivity extends AppCompatActivity implements View.OnCl
                 break;
 
             case R.id.postPhoto:
+                changeImage= true;
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, 3);
                 break;
