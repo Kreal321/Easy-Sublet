@@ -60,7 +60,12 @@ public class AddHomePostFragment extends Fragment implements View.OnClickListene
         binding.createBtn.setOnClickListener(this);
         binding.postPhoto.setOnClickListener(this);
 
-        ((TextInputLayout) binding.tilAddressEntry).setEndIconOnClickListener(this);
+        ((TextInputLayout) binding.tilAddressEntry).setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.addressEntry.setText("Auto set Address");
+            }
+        });
 
         addHomePostViewModel.fetchUser();
 
@@ -156,8 +161,7 @@ public class AddHomePostFragment extends Fragment implements View.OnClickListene
                 break;
 
             default:
-                // TODO: GPS here
-                binding.addressEntry.setText("Auto set Address");
+                
                 break;
         }
     }
