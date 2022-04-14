@@ -135,7 +135,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/usernameEntry"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:focusable="false"/>
 
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -160,7 +161,7 @@
                 android:id="@+id/updateInfoBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Update Info"
+                android:text="Update Email"
                 android:background="#fece2f" />
 
 

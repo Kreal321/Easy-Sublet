@@ -68,8 +68,8 @@
             app:startIconDrawable="@drawable/ic_action_home"
             app:helperText="@string/required"
             app:helperTextTextColor="@color/red"
-            app:endIconMode="clear_text"
-            app:endIconDrawable="@drawable/ic_action_cancel">
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/ic_location">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/addressEntry"
                 android:inputType="textPostalAddress"

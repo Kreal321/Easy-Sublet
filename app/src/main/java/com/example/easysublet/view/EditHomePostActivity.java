@@ -95,6 +95,13 @@ public class EditHomePostActivity extends AppCompatActivity implements View.OnCl
 
         binding.updateBtn.setOnClickListener(this);
         binding.postPhoto.setOnClickListener(this);
+        ((TextInputLayout) binding.tilAddressEntry).setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(MapActivity.newIntent(EditHomePostActivity.this));
+//                binding.addressEntry.setText("Auto set Address");
+            }
+        });
 
         handleDatePicker();
 

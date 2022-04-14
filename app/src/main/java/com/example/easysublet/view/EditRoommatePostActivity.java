@@ -96,6 +96,13 @@ public class EditRoommatePostActivity extends AppCompatActivity implements View.
 
         binding.updateBtn.setOnClickListener(this);
         binding.postPhoto.setOnClickListener(this);
+        ((TextInputLayout) binding.tilAddressEntry).setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(MapActivity.newIntent(EditRoommatePostActivity.this));
+//                binding.addressEntry.setText("Auto set Address");
+            }
+        });
 
         handleDatePicker();
 

@@ -60,6 +60,13 @@ public class AddRoommatePostFragment extends Fragment implements View.OnClickLis
 
         binding.createBtn.setOnClickListener(this);
         binding.postPhoto.setOnClickListener(this);
+        ((TextInputLayout) binding.tilAddressEntry).setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(MapActivity.newIntent(getActivity()));
+//                binding.addressEntry.setText("Auto set Address");
+            }
+        });
 
         handleDatePicker();
 
