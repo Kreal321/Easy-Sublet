@@ -72,4 +72,6 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="update">Update</string>
+
+    <string name="mapbox_access_token">pk.eyJ1IjoicmFuZG9tdXNlcm5vIiwiYSI6ImNsMXoyaW45bTAwNWoza3MxYnA1enBzMHIifQ.NKN7sUKkCSQ8fufOKOi2PA</string>
 </resources>

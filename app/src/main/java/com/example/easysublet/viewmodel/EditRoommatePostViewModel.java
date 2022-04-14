@@ -8,7 +8,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
-import com.example.easysublet.R;
 import com.example.easysublet.model.RoommatePost;
 import com.example.easysublet.repository.postRepo;
 
@@ -21,19 +20,23 @@ public class EditRoommatePostViewModel extends AndroidViewModel {
     private MutableLiveData<List<RoommatePost>> mPostList;
     private postRepo repository;
     private List<RoommatePost> postList;
+    private MutableLiveData<Uri> uriMutableLiveData;
 
     public EditRoommatePostViewModel(Application application) {
         super(application);
         repository = new postRepo(application);
         mPost = repository.getOneRoommatePostData();
         mPostList = repository.getRoommatePostData();
+        uriMutableLiveData = repository.getUriMutableLiveData();
         Log.d(TAG, "EditRoommatePostViewModel() is called");
     }
 
     public MutableLiveData<RoommatePost> getPost() {
         return mPost;
     }
-
+    public MutableLiveData<Uri> getUriMutableLiveData() {
+        return uriMutableLiveData;
+    }
     public MutableLiveData<List<RoommatePost>> getmPostList(){return mPostList;}
 
     public void getPostList(){
@@ -71,11 +74,12 @@ public class EditRoommatePostViewModel extends AndroidViewModel {
         repository.updateRoommatePost(newPost);
     }
 
-    public void uploadImage(){ //TODO: add parameter when testing ability to get image from user
+    //TODO: delete this after testing
+    public void uploadImage(Uri imageUri){ //TODO: add parameter when testing ability to get image from user
 //        Uri imageUri = Uri.parse("android.resource://" + getApplication().getPackageName() +
 //                R.drawable.house2);
-        Uri fileUri = Uri.parse("android.resource://com.example.easysublet/" + R.drawable.house2);
-        repository.uploadImage(fileUri);
+        //Uri fileUri = Uri.parse("android.resource://com.example.easysublet/" + R.drawable.house2);
+        repository.uploadImage(imageUri);
     }
 
 }

@@ -23,6 +23,7 @@ public class EditHomePostViewModel extends AndroidViewModel {
     private mainRepo accountRepo;
     private postRepo repository;
     private List<HomePost> postList;
+    private MutableLiveData<Uri> uriMutableLiveData;
 
     public EditHomePostViewModel(Application application) {
         super(application);
@@ -31,6 +32,7 @@ public class EditHomePostViewModel extends AndroidViewModel {
         userMutableLiveData = accountRepo.getMutableLiveData();
         mPost = repository.getOneHomePostData();
         mPostList = repository.getHomePostData();
+        uriMutableLiveData = repository.getUriMutableLiveData();
         Log.d(TAG, "EditHomePostViewModel() is called");
     }
 
@@ -39,6 +41,9 @@ public class EditHomePostViewModel extends AndroidViewModel {
     }
     public MutableLiveData<User> getUserMutableLiveData() {
         return userMutableLiveData;
+    }
+    public MutableLiveData<Uri> getUriMutableLiveData() {
+        return uriMutableLiveData;
     }
     public MutableLiveData<List<HomePost>> getmPostList(){return mPostList;}
 
