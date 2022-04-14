@@ -109,7 +109,6 @@ public class AddHomePostFragment extends Fragment implements View.OnClickListene
             }
         });
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -118,9 +117,7 @@ public class AddHomePostFragment extends Fragment implements View.OnClickListene
             imagePath = data.getData().getPath();
             Log.d(TAG, "onActivityResult: " + imagePath);
             imageUri = data.getData();
-
         }
-
     }
 
     @Override
@@ -147,7 +144,6 @@ public class AddHomePostFragment extends Fragment implements View.OnClickListene
                         }
                     }
                 });
-
                 //TODO: THIS IS FOR TESTING ONLY, delete this later
 
                 //TODO: need inputs checking

@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v){
-//        String sEmail = binding.emailEntry.getText().toString();
-//        String sPass = binding.passwordEntry.getText().toString();
+        String sEmail = binding.emailEntry.getText().toString();
+        String sPass = binding.passwordEntry.getText().toString();
         //TODO: for text purpose comment out above
 //        String sEmail = "a123@aa.com";
 //        String sPass = "1234567";
@@ -85,9 +85,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        String sEmail = "test@1.com";
 //        String sPass = "123456";
 
-        String sEmail = "test@2.com";
-        String sPass = "123456";
-
+//        String sEmail = "test@4.com";
+//        String sPass = "123456";
         switch (v.getId()) {
             case R.id.loginBtn:
                 if (!sEmail.isEmpty() && !sPass.isEmpty()){

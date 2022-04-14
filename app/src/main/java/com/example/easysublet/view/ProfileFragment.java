@@ -75,7 +75,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onChanged(User user) {
                 if(user != null){
-                    binding.usernameEntry.setText(username);
+                    binding.usernameEntry.setText(user.getUsername());
                     binding.emailEntry.setText(user.getEmail());
                     binding.topAppBar.setTitle(user.getUsername() + "'s Profile");
                     binding.usernameEntry.setText(user.getUsername());
