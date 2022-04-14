@@ -2,12 +2,15 @@ package com.example.easysublet.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -28,6 +31,8 @@ public class EditRoommatePostActivity extends AppCompatActivity implements View.
     private ActivityEditRoommatePostBinding binding;
     private MutableLiveData<RoommatePost> thisPost;
     private EditRoommatePostViewModel editRoommatePostViewModel;
+    private String imagePath;
+    private Uri imageUri;
 
     public static Intent newIntent(Context packageContext, String idx){
         Intent intent = new Intent(packageContext, EditRoommatePostActivity.class);
@@ -78,6 +83,20 @@ public class EditRoommatePostActivity extends AppCompatActivity implements View.
         roommatePostViewModel.setPost(getIntent().getStringExtra("idx"));
 
         binding.updateBtn.setOnClickListener(this);
+        binding.postPhoto.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK && data != null) {
+            binding.postPhoto.setImageURI(data.getData());
+            imagePath = data.getData().getPath();
+            Log.d(TAG, "onActivityResult: " + imagePath);
+            imageUri = data.getData();
+
+        }
 
     }
 
@@ -95,8 +114,14 @@ public class EditRoommatePostActivity extends AppCompatActivity implements View.
                             finish();
                         }
 
+
                     }
                 });
+                break;
+
+            case R.id.postPhoto:
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 3);
                 break;
 
             default:
