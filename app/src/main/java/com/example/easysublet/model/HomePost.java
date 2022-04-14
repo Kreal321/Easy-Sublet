@@ -1,9 +1,11 @@
 package com.example.easysublet.model;
 
-public class HomePost {
+import java.io.Serializable;
+
+public class HomePost implements Serializable {
     private String index;
     private String username;
-    private int image;
+    private String image;
     private String title;
     private boolean active;
     private String address;
@@ -17,7 +19,9 @@ public class HomePost {
     private String time;
     private String other;
 
-    public HomePost(String index, String username, int image, String title, boolean active, String address, String contact, int bathroomNum, int bedroomNum, boolean furnished, String gender, boolean pet, int rent, String time, String other) {
+    public HomePost(){}
+
+    public HomePost(String index, String username, String image, String title, boolean active, String address, String contact, int bathroomNum, int bedroomNum, boolean furnished, String gender, boolean pet, int rent, String time, String other) {
         this.index = index;
         this.username = username;
         this.image = image;
@@ -35,6 +39,10 @@ public class HomePost {
         this.other = other;
     }
 
+    public void setIndex(String pid){
+        index = pid;
+    }
+
     public String getIndex() {
         return index;
     }
@@ -43,7 +51,7 @@ public class HomePost {
         return username;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 

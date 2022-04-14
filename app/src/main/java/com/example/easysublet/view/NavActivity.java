@@ -6,18 +6,17 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.easysublet.R;
-import com.example.easysublet.viewmodel.NavViewModel;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.easysublet.R;
 import com.example.easysublet.databinding.ActivityNavBinding;
+import com.example.easysublet.model.User;
+import com.example.easysublet.viewmodel.NavViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class NavActivity extends AppCompatActivity {
 
@@ -26,12 +25,13 @@ public class NavActivity extends AppCompatActivity {
     private NavViewModel navViewModel;
     private ActivityNavBinding binding;
 
+    private User user;
 
-//    public static Intent newIntent(Context packageContext, String email){
-//        Intent intent = new Intent(packageContext, HomeActivity.class);
-//        intent.putExtra("email", email);
-//        return intent;
-//    }
+    public static Intent newIntent(Context packageContext, User user){
+        Intent intent = new Intent(packageContext, NavActivity.class);
+        intent.putExtra("User", user);
+        return intent;
+    }
 
     private void setResultCode(int code, String message){
         Intent intent = new Intent();
@@ -44,10 +44,15 @@ public class NavActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate() is called");
 
+
         binding = ActivityNavBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         navViewModel =  new ViewModelProvider(this).get(NavViewModel.class);
+
+        //TODO: need to check that this should pass to next level
+        //user = (User) getIntent().getSerializableExtra("User");
+        //String uid = user.getUid();
 
         SharedPreferences emailStored = getSharedPreferences("email",Context.MODE_PRIVATE);
         String email = emailStored.getString("email",null);
@@ -61,6 +66,9 @@ public class NavActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_nav);
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        //TODO: 我要怎么把User Object传向下一个 fragment or activity????: 暂时还是每个activity都query一次，获得新的user，之后再优化这部分
+        //TODO: addHomePost 和addRoomPost 没做！！
     }
 
     @Override

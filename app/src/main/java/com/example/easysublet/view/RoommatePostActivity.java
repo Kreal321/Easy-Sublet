@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -13,7 +15,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.easysublet.R;
 import com.example.easysublet.databinding.ActivityRoommatePostBinding;
 import com.example.easysublet.model.RoommatePost;
+import com.example.easysublet.model.User;
 import com.example.easysublet.viewmodel.RoommatePostViewModel;
+import com.squareup.picasso.Picasso;
 
 public class RoommatePostActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -43,7 +47,13 @@ public class RoommatePostActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onChanged(RoommatePost roommatePost) {
                 binding.title.setText(roommatePost.getTitle());
-                binding.image.setImageResource(roommatePost.getImage());
+//                binding.image.setImageResource(roommatePost.getImage());
+
+                //TODO: post photo with picasso
+                ImageView img = binding.image;
+                Picasso.with(getApplication()).load(roommatePost.getImage()).into(img);
+                Toast.makeText(getApplication(), "get image succeed!!", Toast.LENGTH_SHORT).show();
+
                 binding.address.setText(roommatePost.getAddress());
                 binding.timePeriod.setText(roommatePost.getTime());
                 binding.rent.setText(Integer.toString(roommatePost.getRent()));
@@ -59,12 +69,25 @@ public class RoommatePostActivity extends AppCompatActivity implements View.OnCl
                     binding.other.setText(roommatePost.getOther());
                 }
                 postIdx = roommatePost.getIndex();
+
+                roommatePostViewModel.fectchUser();
+                roommatePostViewModel.getUserMutableLiveData().observe(RoommatePostActivity.this, new Observer<User>() {
+                    @Override
+                    public void onChanged(User User) {
+                        if(!User.getUid().equals(roommatePost.getUsername())) {
+                            binding.editBtn.setVisibility(View.INVISIBLE);
+                            Log.d("TEST Home PostActivity",User.getUid()+"| |"+roommatePost.getUsername());
+                        }else{
+                            binding.editBtn.setOnClickListener(RoommatePostActivity.this);
+                        }
+                    }
+                });
+
             }
         });
 
         roommatePostViewModel.setPost(getIntent().getStringExtra("idx"));
 
-        binding.editBtn.setOnClickListener(this);
     }
 
     @Override

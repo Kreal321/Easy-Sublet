@@ -3,24 +3,24 @@ package com.example.easysublet.repository;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.easysublet.R;
-import com.example.easysublet.model.HomePost;
-import com.example.easysublet.model.RoommatePost;
 import com.example.easysublet.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class mainRepo {
 
@@ -30,12 +30,20 @@ public class mainRepo {
     private FirebaseDatabase mDatabase;
     private DatabaseReference myref;
 
+    //NOTE: Firebase Authentication
+    private FirebaseAuth auth;
+
     public mainRepo(Application application){
         this.application = application;
         mutableLiveUserData = new MutableLiveData<User>();
         userLoggedData = new MutableLiveData<>();
         mDatabase = FirebaseDatabase.getInstance();
         myref = mDatabase.getReference();
+
+        //NOTE：Firebase Authentication
+        auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null){
+        }
     }
 
     public MutableLiveData<User> getMutableLiveData() {
@@ -47,145 +55,211 @@ public class mainRepo {
     }
 
     public void signUp(String username,String email , String password){
-        User user = new User(username,email,password);
-        myref.child("User").child(email).setValue(user);
-    }
+//        User user = new User(username,email,password);
+//        myref.child("User").child(email).setValue(user);
 
-    public void getAccount(String email){
-        myref.child("User").child(email).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        //NOTE: Firebase Signup
+        auth.createUserWithEmailAndPassword(email , password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
-                }
-                else {
-                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                    User user = task.getResult().getValue(User.class);
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    User user = new User(username,email,password);
                     mutableLiveUserData.postValue(user);
+
+                    FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+
+                    //NOTE: Create User-Post database
+                    myref.child("User-Post").child(fuser.getUid()).child("roommate-post-count").setValue(0);
+                    myref.child("User-Post").child(fuser.getUid()).child("home-post-count").setValue(0);
+
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(username)
+                            .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+                            .build();
+
+                    fuser.updateProfile(profileUpdates)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("updateDisplayName", "User profile updated.");
+                                        Toast.makeText(application, "set username Failed.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }else{
+                    Toast.makeText(application, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+
+
+
+    }
+
+    public void getAccount(String email){
+//        myref.child("User").child(email).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                if (!task.isSuccessful()) {
+//                    Log.e("firebase", "Error getting data", task.getException());
+//                }
+//                else {
+//                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
+//                    User user = task.getResult().getValue(User.class);
+//                    mutableLiveUserData.postValue(user);
+//                }
+//            }
+//        });
+
+        SharedPreferences passStored = application.getBaseContext().getSharedPreferences("password",Context.MODE_PRIVATE);
+        String password = passStored.getString("password",null);
+        FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+        User user = new User(fuser.getDisplayName(), fuser.getEmail(), fuser.getUid());
+        mutableLiveUserData.postValue(user);
+
+
     }
 
     public void login(String email , String pass){
 
-        myref.child("User").child(email).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
-                }
-                else {
-                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                    User user = task.getResult().getValue(User.class);
-                    Log.d("Login",String.valueOf(task.getResult().getValue()));
-                    if(user == null || !email.equals(user.getEmail())||!user.passwordIsCorrect(pass)) {
-                        user = null;
-                    }else {
-                        SharedPreferences sharedPref = application.getSharedPreferences("user", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putString("email", email);
-                        editor.putString("username", "testuser");
-                        editor.apply();
-                        editor.commit();
-                    }
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("SignInStatus", "signInWithEmail:success");
+                    SharedPreferences shareUid = application.getSharedPreferences("uid",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = shareUid.edit();
+                    editor.putString("uid",auth.getUid());
+                    editor.apply();
+                    editor.commit();//TODO: might not need this sharePreference later on.
+                    User user = new User(auth.getCurrentUser().getDisplayName(),email,auth.getUid());
                     mutableLiveUserData.postValue(user);
+                } else {
+                    mutableLiveUserData.postValue(null);
+                    // If sign in fails, display a message to the user.
+                    Log.w("SignInStatus", "signInWithEmail:failure", task.getException());
+                    Toast.makeText(application, "Authentication failed.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
+
     }
 
-    public void changePassword(String newPassword){
-        SharedPreferences emailStored = application.getSharedPreferences("email",Context.MODE_PRIVATE);
-        String email = emailStored.getString("email",null);
-        myref.child("User").child(email).child("password").setValue(newPassword);
+    public void changePassword(String oldPassword, String newPassword){
+//        SharedPreferences emailStored = application.getSharedPreferences("email",Context.MODE_PRIVATE);
+//        String email = emailStored.getString("email",null);
+//        myref.child("User").child(email).child("password").setValue(newPassword);
+
+        //DialogUtils.showProgressDialog(getActivity(), "Re-Authenticating", "Please wait...", false);
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        AuthCredential authCredential = EmailAuthProvider.getCredential(firebaseUser.getEmail(), oldPassword);
+        firebaseUser.reauthenticate(authCredential)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            firebaseUser.updatePassword(newPassword)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d("change password", "User password updated.");
+                                            }
+                                        }
+                                    });
+                            Toast.makeText(application, "Password Change Succeed.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(application, "Old password is not correct", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
+
+    public void updateEmail(String email){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseUser.updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Log.d("updateEmail", "User email address updated.");
+                    Toast.makeText(application, "Email Updated.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public void deleteAccount(){
-        SharedPreferences emailStored = application.getSharedPreferences("email",Context.MODE_PRIVATE);
-        String email = emailStored.getString("email",null);
-        myref.child("User").child(email).removeValue();
-        Log.d("deleteAccount", "User account deleted.");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        //TODO: Delete associated post
+        //Note: Remove user's post info
+        myref.child("User-Post").child(uid).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Log.d("deleteAccount-Post", "User account posts deleted.");
+                    Toast.makeText(application, "User account posts deleted.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        //TODO: delete related posts
+
+//        myref.child("Home-Post").orderByChild("username").equalTo(uid).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                List<RoommatePost> roommatePostlist = new ArrayList<RoommatePost>();
+//                if (dataSnapshot.exists()) {
+//                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                        roommatePostlist.add(snapshot.getValue(RoommatePost.class));
+//                    }
+//                }
+//
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//        myref.child("Roommate-Post").orderByChild("username").equalTo(uid).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if (task.isSuccessful()) {
+//                    Log.d("deleteAccount-Post", "User account posts deleted.");
+//                    Toast.makeText(application, "User account posts deleted.", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+
+        user.delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("deleteAccount", "User account deleted.");
+                            Toast.makeText(application, "User account deleted.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+        mutableLiveUserData.postValue(null);
+
     }
 
     public void logOut(){
+        auth.signOut();
         userLoggedData.postValue(true);
     }
 
-
-    //TODO: implement
-
-    public static List<HomePost> getHomePostList() {
-        List<HomePost> list = new ArrayList<>();
-        list.add(new HomePost("1", "Walter", R.drawable.apart1, "This is post 1", true,"Jean Baptiste Point du Sable Lake Shore Drive", "walter@hotmail.com", 2,2, true, "no preference", true, 800, "2022-03-21", "One of my roommate feed a cat."));
-        list.add(new HomePost("2","Sam", R.drawable.apart2, "This is post 2", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new HomePost("3", "testuser", R.drawable.house1, "This is post 3", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new HomePost("4", "Test user", R.drawable.house2, "This is post 4", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new HomePost("5","Test user", R.drawable.house3, "This is post 5", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new HomePost("6","testuser", R.drawable.apart1, "This is post 6", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new HomePost("7","Test user", R.drawable.apart2, "This is post 7", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new HomePost("8","Test user", R.drawable.house1, "This is post 8", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new HomePost("9","Test user", R.drawable.house2, "This is post 9", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new HomePost("10","Test user", R.drawable.house3, "This is post 10", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new HomePost("11","Test user", R.drawable.apart1, "This is post 11", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new HomePost("12","Test user", R.drawable.apart2, "This is post 12", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new HomePost("13","Test user", R.drawable.house1, "This is post 13", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new HomePost("14","Test user", R.drawable.house2, "This is post 14", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new HomePost("15","Test user", R.drawable.house3, "This is post 15", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        return list;
+    public void cleanData(){
+        mutableLiveUserData = new MutableLiveData<User>();
+        userLoggedData = new MutableLiveData<>();
     }
 
-    public static HomePost getHomePost(String idx) {
-        List<HomePost> list = getHomePostList();
-        return list.stream().filter(HomePost -> idx.equals(HomePost.getIndex())).findFirst().orElse(null);
-    }
-
-    public static List<RoommatePost> getRoommatePostList() {
-        List<RoommatePost> list = new ArrayList<>();
-        list.add(new RoommatePost("1", "Test user", R.drawable.apart1, "This is post 1", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("2","Test user", R.drawable.apart2, "This is post 2", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("3", "Test user", R.drawable.house1, "This is post 3", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("5","Test user", R.drawable.house3, "This is post 5", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("4", "Test user", R.drawable.house2, "This is post 4", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("6","testuser", R.drawable.house1, "This is post 6", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("7","Test user", R.drawable.apart2, "This is post 7", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("8","Test user", R.drawable.apart1, "This is post 8", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("9","Test user", R.drawable.house2, "This is post 9", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("10","testuser", R.drawable.house3, "This is post 10", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("11","Test user", R.drawable.apart1, "This is post 11", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("12","Test user", R.drawable.apart2, "This is post 12", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("13","Test user", R.drawable.house1, "This is post 13", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("14","Test user", R.drawable.house2, "This is post 14", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        list.add(new RoommatePost("15","Test user", R.drawable.house3, "This is post 15", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-        return list;
-    }
-
-    public static RoommatePost getRoommatePost(String idx) {
-        List<RoommatePost> list = getRoommatePostList();
-        return list.stream().filter(RoommatePost -> idx.equals(RoommatePost.getIndex())).findFirst().orElse(null);
-    }
-
-    public static List<HomePost> getSearchedHomePostList(String title) {
-        List<HomePost> list = getHomePostList();
-        if(title.length() == 0) return list;
-        return list.stream().filter(HomePost -> HomePost.getTitle().contains(title)).collect(Collectors.toList());
-    }
-
-    public static List<RoommatePost> getSearchedRoommatePostList(String title) {
-        List<RoommatePost> list = getRoommatePostList();
-        if(title.length() == 0) return list;
-        return list.stream().filter(RoommatePost -> RoommatePost.getTitle().contains(title)).collect(Collectors.toList());
-    }
-
-    public static List<HomePost> getMyHomePostList(String username) {
-        List<HomePost> list = getHomePostList();
-        return list.stream().filter(HomePost -> HomePost.getUsername().equals(username)).collect(Collectors.toList());
-    }
-
-    public static List<RoommatePost> getMyRoommatePostList(String username) {
-        List<RoommatePost> list = getRoommatePostList();
-        return list.stream().filter(RoommatePost -> RoommatePost.getUsername().equals(username)).collect(Collectors.toList());
-    }
 
 }

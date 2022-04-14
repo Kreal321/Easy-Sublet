@@ -2,22 +2,24 @@ package com.example.easysublet.model;
 
 import androidx.annotation.Nullable;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     @Nullable
-    private String username, email, password;
+    private String username, email, uid;
 
     public User(){}
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String uid) {
         this.username = username;
         this.email = email;
-        this.password = password;
+        this.uid = uid;
     }
 
     @Nullable
-    public String getPassword() {
-        return password;
+    public String getUid() {
+        return uid;
     }
 
     @Nullable
@@ -35,24 +37,12 @@ public class User {
         this.email = email;
     }
 
-    @Nullable
-    public boolean passwordIsCorrect(String password) {
-        return this.password.equals(password);
-    }
 
     @Nullable
-    public void setPassword(String Password) {
-        this.password = Password;
+    public void setPassword(String uid) {
+        this.uid = uid;
     }
 
-    @Nullable
-    public boolean updatePassword(String oldPassword, String newPassword) {
-        if(!passwordIsCorrect(oldPassword)) {
-            return false;
-        }
-        this.password = newPassword;
-        return true;
-    }
 
 
 }

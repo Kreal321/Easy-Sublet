@@ -3,8 +3,6 @@ package com.example.easysublet.view;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.easysublet.R;
-import com.example.easysublet.databinding.FragmentFindHomeBinding;
 import com.example.easysublet.databinding.FragmentMyHomeBinding;
 import com.example.easysublet.model.HomePost;
-import com.example.easysublet.viewmodel.FindHomeViewModel;
 import com.example.easysublet.viewmodel.MyHomeViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -53,7 +50,9 @@ public class MyHomeFragment extends Fragment implements View.OnClickListener {
 
         binding.addPostBtn.setOnClickListener(this);
 
-        myHomeViewModel.getPostList(currentUser.getString("username", null)).observe(getViewLifecycleOwner(), new Observer<List<HomePost>>() {
+
+        myHomeViewModel.startFecthList("");
+        myHomeViewModel.getPostList().observe(getViewLifecycleOwner(), new Observer<List<HomePost>>() {
             @Override
             public void onChanged(List<HomePost> homePosts) {
                 recyclerView = binding.recyclerView;
@@ -105,7 +104,13 @@ public class MyHomeFragment extends Fragment implements View.OnClickListener {
         public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
             // bind image here
             HomePost p = mData.get(position);
-            holder.img.setImageResource(p.getImage());
+
+            //holder.img.setImageResource(p.getImage());
+            //TODO: post photo with picasso
+            ImageView img = holder.img;
+            Picasso.with(getContext()).load(p.getImage()).into(img);
+            Toast.makeText(getContext(), "get image succeed!!", Toast.LENGTH_SHORT).show();
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View view) {

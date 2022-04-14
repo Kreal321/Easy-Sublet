@@ -3,8 +3,6 @@ package com.example.easysublet.view;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.easysublet.R;
-import com.example.easysublet.databinding.FragmentFindRoommatesBinding;
 import com.example.easysublet.databinding.FragmentMyRoommatesBinding;
 import com.example.easysublet.model.RoommatePost;
-import com.example.easysublet.viewmodel.FindRoommatesViewModel;
 import com.example.easysublet.viewmodel.MyRoommatesViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -55,7 +52,8 @@ public class MyRoommatesFragment extends Fragment implements View.OnClickListene
 
         binding.addPostBtn.setOnClickListener(this);
 
-        myRoommatesViewModel.getPostList(currentUser.getString("username", null)).observe(getViewLifecycleOwner(), new Observer<List<RoommatePost>>() {
+        myRoommatesViewModel.startFectchList();
+        myRoommatesViewModel.getPostList().observe(getViewLifecycleOwner(), new Observer<List<RoommatePost>>() {
             @Override
             public void onChanged(List<RoommatePost> roommatePosts) {
                 recyclerView = binding.recyclerView;
@@ -112,7 +110,12 @@ public class MyRoommatesFragment extends Fragment implements View.OnClickListene
         public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
             // bind image here
             RoommatePost p = mData.get(position);
-            holder.img.setImageResource(p.getImage());
+//            holder.img.setImageResource(p.getImage());
+            //TODO: display image with picasso
+            ImageView img = holder.img;
+            Picasso.with(getActivity()).load(p.getImage()).into(img);
+            Toast.makeText(getActivity(), "get image succeed!!", Toast.LENGTH_SHORT).show();
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View view) {

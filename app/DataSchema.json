@@ -1,9 +1,81 @@
 
 {
-  "User": {
-    "email": {
-      "name": "",
-      "password": ""
+  "Home-Post": {
+    "postkey1": {
+        "active" : true,
+        "address" : "20 N Upper Wacker Dr, Chicago, IL 60606",
+        "bathroomNum" : 1,
+        "bedroomNum" : 4,
+        "contact" : "123@email.com",
+        "furnished" : true,
+        "gender" : "female",
+        "image" : "https://firebasestorage.googleapis.com/v0/b/easysublet-d9441.appspot.com/o/images%2Fapart1.jpeg?alt=media&token=87f1ac1a-66ec-4daf-ac13-08ba2b850c71",
+        "index" : "postkey1",
+        "other" : "",
+        "pet" : false,
+        "rent" : 900,
+        "time" : "2022-03-21",
+        "title" : "This is post 1",
+        "username" : "hZmlZQm00EYba4JqSQyavfXosQH3"
+    },
+    "postkey2": {
+      "active" : true,
+      "address" : "John Dr, Chicago, IL 60606",
+      "bathroomNum" : 2,
+      "bedroomNum" : 2,
+      "contact" : "123@email.com",
+      "furnished" : true,
+      "gender" : "male",
+      "image" : "https://firebasestorage.googleapis.com/v0/b/easysublet-d9441.appspot.com/o/images%2Fapart2.jpeg?alt=media&token=b7d6a5b8-15b3-43d0-aca6-31d32f5b4f18",
+      "index" : "postkey2",
+      "other" : "",
+      "pet" : true,
+      "rent" : 800,
+      "time" : "2022-02-20",
+      "title" : "post-2-apart2",
+      "username" : "hZmlZQm00EYba4JqSQyavfXosQH3"
+    }
+  },
+  "Roommate-Post": {
+    "postkey1": {
+      "active" : true,
+      "address" : "20 N Upper Wacker Dr, Chicago, IL 60606",
+      "bathroomNum" : 1,
+      "bedroomNum" : 4,
+      "contact" : "123@email.com",
+      "furnished" : true,
+      "gender" : "female",
+      "image" : "https://firebasestorage.googleapis.com/v0/b/easysublet-d9441.appspot.com/o/images%2Fapart1.jpeg?alt=media&token=87f1ac1a-66ec-4daf-ac13-08ba2b850c71",
+      "index" : "postkey1",
+      "other" : "",
+      "pet" : false,
+      "rent" : 900,
+      "time" : "2022-03-21",
+      "title" : "This is post 1",
+      "username" : "hZmlZQm00EYba4JqSQyavfXosQH3"
+    },
+    "postkey2": {
+      "active" : true,
+      "address" : "John Dr, Chicago, IL 60606",
+      "bathroomNum" : 2,
+      "bedroomNum" : 2,
+      "contact" : "123@email.com",
+      "furnished" : true,
+      "gender" : "male",
+      "image" : "https://firebasestorage.googleapis.com/v0/b/easysublet-d9441.appspot.com/o/images%2Fapart2.jpeg?alt=media&token=b7d6a5b8-15b3-43d0-aca6-31d32f5b4f18",
+      "index" : "postkey2",
+      "other" : "",
+      "pet" : true,
+      "rent" : 800,
+      "time" : "2022-02-20",
+      "title" : "post-2-apart2",
+      "username" : "hZmlZQm00EYba4JqSQyavfXosQH3"
+    }
+  },
+  "User-Post": {
+    "hZmlZQm00EYba4JqSQyavfXosQH3": {
+      "roommate-post-count": 0,
+      "home-post-count": 0
     }
   }
 }

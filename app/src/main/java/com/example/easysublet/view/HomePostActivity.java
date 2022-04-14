@@ -1,20 +1,23 @@
 package com.example.easysublet.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.easysublet.R;
 import com.example.easysublet.databinding.ActivityHomePostBinding;
 import com.example.easysublet.model.HomePost;
-import com.example.easysublet.model.RoommatePost;
+import com.example.easysublet.model.User;
 import com.example.easysublet.viewmodel.HomePostViewModel;
+import com.squareup.picasso.Picasso;
 
 public class HomePostActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -33,9 +36,7 @@ public class HomePostActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Log.d(TAG, "onCreate() is called");
-
         homePostViewModel = new ViewModelProvider(this).get(HomePostViewModel.class);
         binding = ActivityHomePostBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -44,7 +45,13 @@ public class HomePostActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onChanged(HomePost homePost) {
                 binding.title.setText(homePost.getTitle());
-                binding.image.setImageResource(homePost.getImage());
+
+                //binding.image.setImageResource(homePost.getImage());
+                //TODO: post photo with picasso
+                ImageView img = binding.image;
+                Picasso.with(getApplication()).load(homePost.getImage()).into(img);
+                Toast.makeText(getApplication(), "get image succeed!!", Toast.LENGTH_SHORT).show();
+
                 binding.address.setText(homePost.getAddress());
                 binding.timePeriod.setText(homePost.getTime());
                 binding.rent.setText(Integer.toString(homePost.getRent()));
@@ -60,12 +67,25 @@ public class HomePostActivity extends AppCompatActivity implements View.OnClickL
                     binding.other.setText(homePost.getOther());
                 }
                 postIdx = homePost.getIndex();
+                homePostViewModel.fectchUser();
+                homePostViewModel.getUserMutableLiveData().observe(HomePostActivity.this, new Observer<User>() {
+                    @Override
+                    public void onChanged(User User) {
+                        if(!User.getUid().equals(homePost.getUsername())) {
+                            binding.editBtn.setVisibility(View.INVISIBLE);
+                            Log.d("TEST Home PostActivity",User.getUid()+"| |"+homePost.getUsername());
+                        }else{
+                            binding.editBtn.setOnClickListener(HomePostActivity.this);
+                        }
+                    }
+                });
+
             }
         });
 
-        homePostViewModel.setPost(getIntent().getStringExtra("idx"));
 
-        binding.editBtn.setOnClickListener(this);
+        homePostViewModel.setPost(getIntent().getStringExtra("idx"));
+        
 
     }
 

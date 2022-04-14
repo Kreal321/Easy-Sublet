@@ -81,4 +81,15 @@ dependencies {
 
 
 
+    //Firebase Cloud Storage Dependency Start------------
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:29.2.0')
+    // Declare the dependency for the Cloud Storage library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-storage'
+    //Firebase Cloud Storage Dependency Ended --------
+
+    //Picasso image process
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
 }

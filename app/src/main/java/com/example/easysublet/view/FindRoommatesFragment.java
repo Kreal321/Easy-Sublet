@@ -1,7 +1,6 @@
 package com.example.easysublet.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,15 +18,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-
-import com.example.easysublet.model.HomePost;
-import com.example.easysublet.model.RoommatePost;
-
 import com.example.easysublet.R;
 import com.example.easysublet.databinding.FragmentFindRoommatesBinding;
-import com.example.easysublet.repository.mainRepo;
+import com.example.easysublet.model.RoommatePost;
 import com.example.easysublet.viewmodel.FindRoommatesViewModel;
-
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -57,6 +51,7 @@ public class FindRoommatesFragment extends Fragment implements View.OnClickListe
         binding.searchBtn.setOnClickListener(this);
 //        binding.mapButton.setOnClickListener(this);
 
+
         binding.searchEntry.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -66,7 +61,7 @@ public class FindRoommatesFragment extends Fragment implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(charSequence.length() == 0){
-                    findRoommatesViewModel.getFilteredPostList("");
+                    //findRoommatesViewModel.getFilteredPostList("");
                 }
             }
 
@@ -138,11 +133,17 @@ public class FindRoommatesFragment extends Fragment implements View.OnClickListe
         public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
             // bind image here
             RoommatePost p = mData.get(position);
-            holder.img.setImageResource(p.getImage());
+//            holder.img.setImageResource(p.getImage());
+            //TODO: display image with picasso
+            ImageView img = holder.img;
+            Picasso.with(getActivity()).load(p.getImage()).into(img);
+            Toast.makeText(getActivity(), "get image succeed!!", Toast.LENGTH_SHORT).show();
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View view) {
                        mContext.startActivity(RoommatePostActivity.newIntent(mContext, p.getIndex()));
+                       Log.d("Find Roomate post click", "click on post 1 for find roommate");
                        Toast.makeText(mContext, "click on post " + p.getIndex(), Toast.LENGTH_SHORT).show();
                    }
                }

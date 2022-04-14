@@ -5,23 +5,25 @@ import static android.app.Activity.RESULT_OK;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.easysublet.R;
 import com.example.easysublet.databinding.FragmentAddHomePostBinding;
+import com.example.easysublet.model.User;
 import com.example.easysublet.viewmodel.AddHomePostViewModel;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
@@ -39,6 +41,7 @@ public class AddHomePostFragment extends Fragment implements View.OnClickListene
     private AddHomePostViewModel addHomePostViewModel;
     private SharedPreferences currentUser;
     private String imagePath;
+    private Uri imageUri;
 
 
 
@@ -56,6 +59,8 @@ public class AddHomePostFragment extends Fragment implements View.OnClickListene
 
         binding.createBtn.setOnClickListener(this);
         binding.postPhoto.setOnClickListener(this);
+
+        addHomePostViewModel.fetchUser();
 
         handleDatePicker();
 
@@ -105,6 +110,7 @@ public class AddHomePostFragment extends Fragment implements View.OnClickListene
             binding.postPhoto.setImageURI(data.getData());
             imagePath = data.getData().getPath();
             Log.d(TAG, "onActivityResult: " + imagePath);
+            imageUri = data.getData();
 
         }
 
@@ -114,9 +120,32 @@ public class AddHomePostFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.createBtn:
+                addHomePostViewModel.getUserMutableLiveData().observe(getActivity(), new Observer<User>() {
+                    @Override
+                    public void onChanged(User user) {
+                        if(user != null){
+                            Log.d(TAG, "Entered Here 1:");
+                            if(imageUri!= null){
+                                Log.d(TAG, "Entered Here 2:");
+                                addHomePostViewModel.uploadImage(imageUri);
+                                addHomePostViewModel.getUploadedUri().observe(getViewLifecycleOwner(), new Observer<Uri>() {
+                                    @Override
+                                    public void onChanged(Uri uri) {
+                                        Log.d(TAG, "Entered Here 3:");
+                                        addHomePostViewModel.createPost(user.getUid(), binding.titleEntry.getText().toString(), binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), uri.toString());
+                                        getActivity().finish();
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
+
+                //TODO: THIS IS FOR TESTING ONLY, delete this later
+
                 //TODO: need inputs checking
-                addHomePostViewModel.createPost(currentUser.getString("username", null), binding.titleEntry.getText().toString(), binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), R.drawable.apart1);
-                getActivity().finish();
+//                addHomePostViewModel.createPost(currentUser.getString("username", null), binding.titleEntry.getText().toString(), binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), R.drawable.apart1);
+//                getActivity().finish();
                 break;
 
             case R.id.postPhoto:
