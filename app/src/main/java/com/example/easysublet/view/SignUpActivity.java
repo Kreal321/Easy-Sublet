@@ -60,14 +60,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.signUpBtn:
 
-                if(binding.passwordEntry!=null && binding.emailEntry!=null&&binding.usernameEntry!=null) {
+                if(binding.passwordEntry!=null && binding.emailEntry!=null && binding.usernameEntry!=null) {
                     if (!binding.passwordEntry.getText().toString().equals(binding.confirmPasswordEntry.getText().toString())) {
                         Toast.makeText(SignUpActivity.this, "Two passwords are different", Toast.LENGTH_SHORT).show();
                         binding.passwordEntry.setText(null);
                         binding.confirmPasswordEntry.setText(null);
                     } else{
                         signUpViewModel.addUser(binding.usernameEntry.getText().toString(), binding.emailEntry.getText().toString(), binding.passwordEntry.getText().toString());
-                        Toast.makeText(SignUpActivity.this, "Email is registered", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, "Register succeeded", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }

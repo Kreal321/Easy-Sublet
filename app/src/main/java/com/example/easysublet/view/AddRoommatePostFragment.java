@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -115,6 +116,43 @@ public class AddRoommatePostFragment extends Fragment implements View.OnClickLis
 
     }
 
+    public Boolean postInputCheck() {
+        if(binding.titleEntry.getText().toString().length() == 0) {
+            Toast.makeText(getActivity(), "Title cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(binding.addressEntry.getText().toString().length() == 0) {
+            Toast.makeText(getActivity(), "Address cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(binding.timeEntry.getText().toString().length() == 0) {
+            Toast.makeText(getActivity(), "Time cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(binding.rentEntry.getText().toString().length() == 0) {
+            Toast.makeText(getActivity(), "Rent cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(binding.contactEntry.getText().toString().length() == 0) {
+            Toast.makeText(getActivity(), "Contact cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(binding.bathroomEntry.getText().toString().length() == 0) {
+            Toast.makeText(getActivity(), "Bathroom cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(binding.bedroomEntry.getText().toString().length() == 0) {
+            Toast.makeText(getActivity(), "Bedroom cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(binding.genderEntry.getText().toString().length() == 0) {
+            Toast.makeText(getActivity(), "Gender cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -124,6 +162,8 @@ public class AddRoommatePostFragment extends Fragment implements View.OnClickLis
                 addRoommatePostViewModel.getUserMutableLiveData().observe(getActivity(), new Observer<User>() {
                     @Override
                     public void onChanged(User user) {
+                        if(!postInputCheck()) return;
+
                         if(user != null){
                             Log.d(TAG, "Entered Here 1:");
                             if(imageUri!= null){

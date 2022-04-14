@@ -160,6 +160,43 @@ public class EditRoommatePostActivity extends AppCompatActivity implements View.
 
     }
 
+    public Boolean postInputCheck() {
+        if(binding.titleEntry.getText().toString().length() == 0) {
+            Toast.makeText(this, "Title cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(binding.addressEntry.getText().toString().length() == 0) {
+            Toast.makeText(this, "Address cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(binding.timeEntry.getText().toString().length() == 0) {
+            Toast.makeText(this, "Time cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(binding.rentEntry.getText().toString().length() == 0) {
+            Toast.makeText(this, "Rent cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(binding.contactEntry.getText().toString().length() == 0) {
+            Toast.makeText(this, "Contact cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(binding.bathroomEntry.getText().toString().length() == 0) {
+            Toast.makeText(this, "Bathroom cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(binding.bedroomEntry.getText().toString().length() == 0) {
+            Toast.makeText(this, "Bedroom cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(binding.genderEntry.getText().toString().length() == 0) {
+            Toast.makeText(this, "Gender cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -168,6 +205,7 @@ public class EditRoommatePostActivity extends AppCompatActivity implements View.
                 thisPost.observe(this, new Observer<RoommatePost>() {
                     @Override
                     public void onChanged(RoommatePost roommatePost) {
+                        if(!postInputCheck()) return;
                         if(roommatePost != null){
                             Log.d(TAG, "Entered Here 1:");
                             SharedPreferences uriStored = getSharedPreferences("uri",Context.MODE_PRIVATE);
