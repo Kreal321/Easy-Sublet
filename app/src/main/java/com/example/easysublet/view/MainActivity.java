@@ -1,8 +1,13 @@
 package com.example.easysublet.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -15,6 +20,8 @@ import com.example.easysublet.R;
 import com.example.easysublet.databinding.ActivityMainBinding;
 import com.example.easysublet.model.User;
 import com.example.easysublet.viewmodel.MainViewModel;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -52,10 +59,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    public static void setLanguage(Activity activity) {
+        SharedPreferences user = activity.getSharedPreferences("user" , Context.MODE_PRIVATE);
+        String language = user.getString("language", "en");
+
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Resources resources = activity.getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+
+    }
+
+    public static void changeLanguage(Activity activity) {
+        SharedPreferences user = activity.getSharedPreferences("user" , Context.MODE_PRIVATE);
+        String language = user.getString("language", "en");
+        SharedPreferences.Editor edit = user.edit();
+        if (language.equals("en")) {
+            edit.putString("language", "zh");
+        } else {
+            edit.putString("language", "en");
+        }
+        edit.apply();
+        Log.d(TAG, "changeLanguage: to" + user.getString("language", "en"));
+        activity.recreate();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate() is called");
+        setLanguage(MainActivity.this);
 
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
@@ -65,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         binding.loginBtn.setOnClickListener(this);
         binding.signUpBtn.setOnClickListener(this);
+        binding.changeLanguageBtn.setOnClickListener(this);
         mainViewModel.getUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(User User) {
@@ -100,6 +136,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
 
+            case R.id.changeLanguageBtn:
+                Log.d(TAG, "onClick: change language");
+                changeLanguage(MainActivity.this);
+                break;
+
             default:
                 break;
         }
@@ -108,11 +149,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void updateUI(User user){
 
         if(user != null){
-            Toast.makeText(this,"Logged In successfully",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, this.getString(R.string.login_success) ,Toast.LENGTH_LONG).show();
             startActivity(new Intent(this, NavActivity.class));
 
         }else {
-            Toast.makeText(this,"Incorrect Info",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, this.getString(R.string.login_error) ,Toast.LENGTH_LONG).show();
         }
 
     }

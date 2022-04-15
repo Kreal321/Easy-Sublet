@@ -100,6 +100,19 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/changeLanguageBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/language"
+        android:textAllCaps="false"
+        android:shadowColor="@color/gray"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="20"
+        android:layout_below="@id/signUpLayout"
+        android:layout_centerHorizontal="true"/>
 
 
 

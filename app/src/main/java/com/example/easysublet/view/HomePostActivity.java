@@ -1,7 +1,11 @@
 package com.example.easysublet.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +23,8 @@ import com.example.easysublet.model.User;
 import com.example.easysublet.viewmodel.HomePostViewModel;
 import com.squareup.picasso.Picasso;
 
+import java.util.Locale;
+
 public class HomePostActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "HomePostActivity";
@@ -33,10 +39,25 @@ public class HomePostActivity extends AppCompatActivity implements View.OnClickL
         return intent;
     }
 
+    public static void setLanguage(Activity activity) {
+        SharedPreferences user = activity.getSharedPreferences("user" , Context.MODE_PRIVATE);
+        String language = user.getString("language", "en");
+
+        if (language.equals("zh")) {
+            Locale locale = new Locale(language);
+            Locale.setDefault(locale);
+            Resources resources = activity.getResources();
+            Configuration config = resources.getConfiguration();
+            config.setLocale(locale);
+            resources.updateConfiguration(config, resources.getDisplayMetrics());
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate() is called");
+        setLanguage(HomePostActivity.this);
         homePostViewModel = new ViewModelProvider(this).get(HomePostViewModel.class);
         binding = ActivityHomePostBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

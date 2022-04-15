@@ -57,17 +57,16 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:includeFontPadding="false"
-                        android:text="1"
                         android:textSize="25sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Home Post"
-                        android:includeFontPadding="false"
-                        android:textSize="12sp"
+                        android:layout_below="@+id/HomePostNum"
                         android:layout_centerInParent="true"
-                        android:layout_below="@+id/HomePostNum"/>
+                        android:includeFontPadding="false"
+                        android:text="@string/home_post"
+                        android:textSize="12sp" />
 
                 </RelativeLayout>
 
@@ -99,13 +98,12 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:includeFontPadding="false"
-                        android:text="0"
                         android:textSize="25sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Roommate Post"
+                        android:text="@string/roommate_post"
                         android:includeFontPadding="false"
                         android:textSize="12sp"
                         android:layout_centerInParent="true"
@@ -127,7 +125,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="User Name"
+                android:hint="@string/username"
                 app:startIconDrawable="@drawable/ic_person"
                 android:layout_marginBottom="10dp"
                 app:boxBackgroundColor="@color/main_lighter">
@@ -144,7 +142,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="@string/email"
                 app:startIconDrawable="@drawable/ic_email"
                 android:layout_marginBottom="10dp"
                 app:boxBackgroundColor="@color/main_lighter">
@@ -161,7 +159,7 @@
                 android:id="@+id/updateInfoBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Update Email"
+                android:text="@string/update_email"
                 android:background="#fece2f" />
 
 
@@ -177,7 +175,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Old Password"
+                android:hint="@string/old_pw"
                 app:startIconDrawable="@drawable/ic_lock"
                 app:endIconMode="password_toggle"
                 android:layout_marginBottom="10dp"
@@ -195,7 +193,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="New Password"
+                android:hint="@string/new_pw"
                 app:startIconDrawable="@drawable/ic_lock"
                 app:endIconMode="password_toggle"
                 android:layout_marginBottom="10dp"
@@ -213,7 +211,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Confirm Password"
+                android:hint="@string/confirm_pw"
                 app:startIconDrawable="@drawable/ic_lock"
                 app:endIconMode="password_toggle"
                 android:layout_marginBottom="10dp"
@@ -235,6 +233,22 @@
                 android:layout_marginBottom="10dp"
                 android:background="#fece2f" />
 
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <Button
+                android:id="@+id/languageBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="#fece2f"
+                android:text="@string/change_language" />
 
         </LinearLayout>
 

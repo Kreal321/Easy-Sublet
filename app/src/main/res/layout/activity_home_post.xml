@@ -18,7 +18,7 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:title="Home Post"
+                app:title="@string/home_post"
                 app:titleCentered="true"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
 
@@ -349,7 +349,7 @@
             android:layout_below="@+id/llOther"
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="5dp"
-            android:text="Edit Post" />
+            android:text="@string/edit_post" />
 
         <TextView
             android:layout_width="wrap_content"

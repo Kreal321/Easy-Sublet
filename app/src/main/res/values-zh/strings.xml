@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">极易转租</string>
+    <string name="hello">你好</string>
+    <string name="email">邮箱</string>>
+    <string name="password">密码</string>>
+    <string name="post_title_hint">Enter a roommatePost title</string>
+    <string name="sign_up_question">没有账户？ |</string>
+    <string name="sign_up">注册</string>
+    <string name="sign_in">登录</string>
+    <string name="log_out">登出</string>
+    <string name="get_start">开始转租吧</string>
+    <string name="username">用户名</string>>
+    <string name="old_pw">旧密码</string>
+    <string name="new_pw">新密码</string>
+    <string name="confirm_pw">确认新密码</string>
+    <string name="setting">设置</string>
+    <string name="change_pw">更改密码</string>
+    <string name="delete_acc">删除账户</string>
+    <string name="confirm">确认</string>
+    <string name="map_button">Map Button</string>
+    <string name="image_description">This is an image</string>
+    <string name="required">必须*</string>
+    <string name="address">地址</string>
+    <string name="time_period">时间</string>
+    <string name="rent">每月租金</string>
+    <string name="bathroom">洗手间数量</string>
+    <string name="bedroom">卧室数量</string>
+    <string name="post">发布</string>
+    <string name="contact">联系电话/邮箱</string>
+    <string name="gender">Gender</string>
+    <string name="more_info">更多的信息。。</string>
+    <string name="other_info">其他信息</string>
+    <string name="add_photo_des">点击图片添加照片</string>
+    <string name="preference_of_gender">偏好性别</string>
+    <string name="pet">可以有宠物</string>
+    <string name="furnished">带家具</string>
+
+
+    <string name="preferred_address">偏好地点</string>
+    <string name="preferred_period">大致居住时间</string>
+    <string name="preferred_rent">偏好每月房租</string>
+    <string name="preferred_bathroom">洗手间数量</string>
+    <string name="preferred_bedroom">卧室数量</string>
+    <string name="preferred_pet">有宠物</string>
+    <string name="preferred_furnished">需要带家具</string>
+
+    <string name="camera">摄像头</string>
+    <string name="gallery">相册</string>
+    <string name="cancel">取消</string>
+    <string name="title">标题</string>
+
+    <string name="withPet">有宠物</string>
+    <string name="find_home">找房子</string>
+    <string name="find_roommate">找舍友</string>
+    <string name="profile">主页</string>
+    <string name="hello_blank_fragment">你好</string>
+    <string name="title_activity_bottom_nav">BottomNavActivity</string>
+    <string name="title_home">主页</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_nav">NavActivity</string>
+    <string name="title_activity_add_post">AddPostActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="title_activity_home_post">HomePostActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="update">更新</string>
+
+    <string name="mapbox_access_token">pk.eyJ1IjoicmFuZG9tdXNlcm5vIiwiYSI6ImNsMXoyaW45bTAwNWoza3MxYnA1enBzMHIifQ.NKN7sUKkCSQ8fufOKOi2PA</string>
+    <string name="roommate_post">找舍友帖子</string>
+    <string name="home_post">找房子帖子</string>
+    <string name="update_email">更新邮箱</string>
+    <string name="p_profile">的主页</string>
+    <string name="search">搜索</string>
+    <string name="edit_home_post">修改找房子帖子</string>
+    <string name="edit_roommate_post">修改找舍友帖子</string>
+    <string name="edit_post">修改帖子</string>
+    <string name="new_home_post">创建找房子帖子</string>
+    <string name="new_roommate_post">创建找舍友帖子</string>
+    <string name="login_success">登录成功</string>
+    <string name="login_error">错误信息</string>
+    <string name="language">English</string>
+    <string name="change_language">Change to English</string>
+</resources>

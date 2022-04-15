@@ -95,7 +95,7 @@ public class FindRoommatesFragment extends Fragment implements View.OnClickListe
         switch (v.getId()) {
             case R.id.addPostBtn:
                 startActivity(AddPostActivity.newIntent(getActivity(), 1));
-                Toast.makeText(getActivity().getApplicationContext(), "Add post", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity().getApplicationContext(), "Add post", Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.searchBtn:

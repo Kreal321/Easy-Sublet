@@ -1,5 +1,6 @@
 package com.example.easysublet.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -70,6 +71,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         binding.logoutBtn.setOnClickListener(this);
         binding.roommatePostCard.setOnClickListener(this);
         binding.homePostCard.setOnClickListener(this);
+        binding.languageBtn.setOnClickListener(this);
 
         profileViewModel.getUser().observe(getViewLifecycleOwner(), new Observer<User>() {
             @Override
@@ -77,7 +79,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 if(user != null){
                     binding.usernameEntry.setText(user.getUsername());
                     binding.emailEntry.setText(user.getEmail());
-                    binding.topAppBar.setTitle(user.getUsername() + "'s Profile");
+                    binding.topAppBar.setTitle(user.getUsername() + getString(R.string.p_profile));
+                    Log.d(TAG, "onChanged: " + getString(R.string.p_profile));
                     binding.usernameEntry.setText(user.getUsername());
                 }
             }
@@ -97,6 +100,20 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public static void changeLanguage(Activity activity) {
+        SharedPreferences user = activity.getSharedPreferences("user" , Context.MODE_PRIVATE);
+        String language = user.getString("language", "en");
+        SharedPreferences.Editor edit = user.edit();
+        if (language.equals("en")) {
+            edit.putString("language", "zh");
+        } else {
+            edit.putString("language", "en");
+        }
+        edit.apply();
+        Log.d(TAG, "changeLanguage: to" + user.getString("language", "en"));
+        activity.recreate();
     }
 
     @Override
@@ -143,6 +160,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 profileViewModel.logout();//NOTE: logout firebase
                 getActivity().finish();
                 break;
+
+            case R.id.languageBtn:
+                changeLanguage(getActivity());
 
             default:
                 break;

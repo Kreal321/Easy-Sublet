@@ -1,9 +1,14 @@
 package com.example.easysublet.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 
+import com.example.easysublet.R;
 import com.example.easysublet.view.AddHomePostFragment;
 import com.example.easysublet.view.AddRoommatePostFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,6 +33,7 @@ import com.example.easysublet.databinding.ActivityAddPostBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class AddPostActivity extends AppCompatActivity {
 
@@ -40,10 +46,23 @@ public class AddPostActivity extends AppCompatActivity {
         return intent;
     }
 
+    public static void setLanguage(Activity activity) {
+        SharedPreferences user = activity.getSharedPreferences("user" , Context.MODE_PRIVATE);
+        String language = user.getString("language", "en");
+
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Resources resources = activity.getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setLanguage(AddPostActivity.this);
         binding = ActivityAddPostBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -52,8 +71,8 @@ public class AddPostActivity extends AppCompatActivity {
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), 0);
 
-        sectionsPagerAdapter.addFragment(addHomePostFragment, "New home post");
-        sectionsPagerAdapter.addFragment(addRoommatePostFragment, "New Roommate post");
+        sectionsPagerAdapter.addFragment(addHomePostFragment, getString(R.string.new_home_post));
+        sectionsPagerAdapter.addFragment(addRoommatePostFragment, getString(R.string.new_roommate_post));
 
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);

@@ -74,4 +74,18 @@
     <string name="update">Update</string>
 
     <string name="mapbox_access_token">pk.eyJ1IjoicmFuZG9tdXNlcm5vIiwiYSI6ImNsMXoyaW45bTAwNWoza3MxYnA1enBzMHIifQ.NKN7sUKkCSQ8fufOKOi2PA</string>
+    <string name="roommate_post">Roommate Post</string>
+    <string name="home_post">Home Post</string>
+    <string name="update_email">Update Email</string>
+    <string name="p_profile">\'s Profile</string>
+    <string name="search">Search</string>
+    <string name="edit_home_post">Edit Home Post</string>
+    <string name="edit_roommate_post">Edit Roommate Post</string>
+    <string name="edit_post">Edit Post</string>
+    <string name="new_home_post">New home post</string>
+    <string name="new_roommate_post">New Roommate post</string>
+    <string name="login_success">Logged In successfully</string>
+    <string name="login_error">Incorrect Info</string>
+    <string name="language">中文</string>
+    <string name="change_language">更改为中文</string>
 </resources>

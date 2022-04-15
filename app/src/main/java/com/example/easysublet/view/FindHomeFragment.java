@@ -98,7 +98,7 @@ public class FindHomeFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.addPostBtn:
                 startActivity(AddPostActivity.newIntent(getActivity(), 0));
-                Toast.makeText(getActivity().getApplicationContext(), "Add post", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity().getApplicationContext(), "Add post", Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.searchBtn:
