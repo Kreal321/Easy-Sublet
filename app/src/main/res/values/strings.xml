@@ -85,7 +85,7 @@
     <string name="new_home_post">New home post</string>
     <string name="new_roommate_post">New Roommate post</string>
     <string name="login_success">Logged In successfully</string>
-    <string name="login_error">Incorrect Info</string>
+    <string name="login_error">Login in failed</string>
     <string name="language">中文</string>
     <string name="change_language">更改为中文</string>
 </resources>
