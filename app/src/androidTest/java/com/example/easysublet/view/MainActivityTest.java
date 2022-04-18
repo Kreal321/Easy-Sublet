@@ -58,4 +58,15 @@ public class MainActivityTest {
         onView(withText(R.string.login_success)).inRoot(withDecorView(not(decorView))).check(matches(isDisplayed()));
     }
 
+    @Test
+    public void testSignUp(){
+        onView(withId(R.id.signUpBtn)).perform(click());
+        onView(withId(R.id.usernameEntry)).perform(typeText("test"),closeSoftKeyboard());
+        onView(withId(R.id.emailEntry)).perform(typeText("test@11.com"),closeSoftKeyboard());
+        onView(withId(R.id.passwordEntry)).perform(typeText("123456"),closeSoftKeyboard());
+        onView(withId(R.id.confirmPasswordEntry)).perform(typeText("123456"),closeSoftKeyboard());
+        onView(withId(R.id.signUpBtn)).perform(click());
+        onView(withText(R.string.register_succeeded)).inRoot(withDecorView(not(decorView))).check(matches(isDisplayed()));
+    }
+
 }

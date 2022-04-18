@@ -88,4 +88,5 @@
     <string name="login_error">Login in failed</string>
     <string name="language">中文</string>
     <string name="change_language">更改为中文</string>
+    <string name="register_succeeded">Register succeeded</string>
 </resources>

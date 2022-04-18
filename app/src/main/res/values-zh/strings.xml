@@ -89,4 +89,5 @@
     <string name="login_error">登录失败</string>
     <string name="language">English</string>
     <string name="change_language">Change to English</string>
+    <string name="register_succeeded">Register succeeded</string>
 </resources>

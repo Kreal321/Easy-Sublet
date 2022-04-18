@@ -86,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         binding.confirmPasswordEntry.setText(null);
                     } else{
                         signUpViewModel.addUser(binding.usernameEntry.getText().toString(), binding.emailEntry.getText().toString(), binding.passwordEntry.getText().toString());
-                        Toast.makeText(SignUpActivity.this, "Register succeeded", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, R.string.register_succeeded, Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }
