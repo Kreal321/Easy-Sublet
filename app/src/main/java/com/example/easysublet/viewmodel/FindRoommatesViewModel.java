@@ -15,25 +15,6 @@ import java.util.List;
 
 public class FindRoommatesViewModel extends AndroidViewModel {
 
-//    private static final String TAG = "FindRoommatesViewModel";
-//    private final MutableLiveData<List<RoommatePost>> postList;
-
-//    public FindRoommatesViewModel() {
-//        postList = new MutableLiveData<>();
-//        postList.setValue(mainRepo.getRoommatePostList());
-//        Log.d(TAG, "FindRoommatesViewModel() is called");
-//    }
-
-//    public LiveData<List<RoommatePost>> getPostList() {
-//        return this.postList;
-//    }
-
-//    public void getFilteredPostList(String title) {
-//        postList.setValue(mainRepo.getSearchedRoommatePostList(title));
-//    }
-
-
-    //Work Below----------------
     private static final String TAG = "FindRoommatesViewModel";
     private final MutableLiveData<String> mText;
     private MutableLiveData<List<RoommatePost>> mList;

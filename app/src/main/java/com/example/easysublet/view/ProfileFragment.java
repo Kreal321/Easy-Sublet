@@ -20,6 +20,7 @@ import com.example.easysublet.databinding.FragmentProfileBinding;
 import com.example.easysublet.model.HomePost;
 import com.example.easysublet.model.RoommatePost;
 import com.example.easysublet.model.User;
+import com.example.easysublet.repository.helperRepo;
 import com.example.easysublet.viewmodel.ProfileViewModel;
 
 import java.util.List;
@@ -120,40 +121,49 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.homePostCard:
-                startActivity(MyPostActivity.newIntent(getActivity(), 0));
+                if(helperRepo.isConnected(getActivity().getApplication())){
+                    startActivity(MyPostActivity.newIntent(getActivity(), 0));
+                }
                 break;
 
             case R.id.roommatePostCard:
-                startActivity(MyPostActivity.newIntent(getActivity(), 1));
+                if(helperRepo.isConnected(getActivity().getApplication())){
+                    startActivity(MyPostActivity.newIntent(getActivity(), 1));
+                }
                 break;
 
             case R.id.updateInfoBtn:
-                profileViewModel.updateInfo(binding.usernameEntry.getText().toString(), binding.emailEntry.getText().toString());
+                if(helperRepo.isConnected(getActivity().getApplication())){
+                    profileViewModel.updateInfo(binding.usernameEntry.getText().toString(), binding.emailEntry.getText().toString());
+                }
                 break;
 
             case R.id.changePwBtn:
-                String oldPassword = binding.oldPasswordEntry.getText().toString();
-                String newPassword1 = binding.newPasswordEntry.getText().toString();
-                String newPassword2 = binding.confirmPasswordEntry.getText().toString();
-                Log.d("onclick test", "onclick() is called");
-                if (!newPassword1.equals(newPassword2)) {
-                    Toast.makeText(getActivity(), "Two passwords are different", Toast.LENGTH_SHORT).show();
+                if(helperRepo.isConnected(getActivity().getApplication())){
+                    String oldPassword = binding.oldPasswordEntry.getText().toString();
+                    String newPassword1 = binding.newPasswordEntry.getText().toString();
+                    String newPassword2 = binding.confirmPasswordEntry.getText().toString();
+                    Log.d("onclick test", "onclick() is called");
+                    if (!newPassword1.equals(newPassword2)) {
+                        Toast.makeText(getActivity(), "Two passwords are different", Toast.LENGTH_SHORT).show();
 
-                }else if(newPassword1.length()<6){
-                    Toast.makeText(getActivity(), "password length should exceed or equal to 6", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    profileViewModel.changePassword(oldPassword, newPassword1);
-                }
-                binding.oldPasswordEntry.setText(null);
-                binding.newPasswordEntry.setText(null);
-                binding.confirmPasswordEntry.setText(null);
+                    } else if (newPassword1.length() < 6) {
+                        Toast.makeText(getActivity(), "password length should exceed or equal to 6", Toast.LENGTH_SHORT).show();
+                    } else {
+                        profileViewModel.changePassword(oldPassword, newPassword1);
+                    }
+                    binding.oldPasswordEntry.setText(null);
+                    binding.newPasswordEntry.setText(null);
+                    binding.confirmPasswordEntry.setText(null);
 //              Toast.makeText(getActivity().getApplicationContext(), "Change password", Toast.LENGTH_LONG).show();
+                }
                 break;
 
             case R.id.deleteAccountBtn:
-                profileViewModel.deleteUser();
-                getActivity().finish();
+                if(helperRepo.isConnected(getActivity().getApplication())){
+                    profileViewModel.deleteUser();
+                    getActivity().finish();
+                }
                 break;
 
             case R.id.logoutBtn:

@@ -62,24 +62,6 @@ public class postRepo {
     public MutableLiveData<RoommatePost> getOneRoommatePostData() { return mutableLiveSingleRoommatePost; }
     public MutableLiveData<Uri> getUriMutableLiveData() { return uriMutableLiveData; }
 
-    //Helper function
-    //My top posts by number of stars
-//    public void addCount(String userID){
-//        myref.child("User").child(userID).child("postCount").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                if (!task.isSuccessful()) {
-//                    Log.e("updateCount", "Error getting data", task.getException());
-//                }
-//                else {
-//                    Log.d("updateCount", String.valueOf(task.getResult().getValue()));
-//                    myref.child("User").child(userID).child("postCount").setValue(Integer.parseInt(String.valueOf(task.getResult().getValue()))+1);
-//                }
-//            }
-//        });
-//    }
-    //---
-
 
     //TODO: implement
 
@@ -112,8 +94,6 @@ public class postRepo {
         //add count for this user
         myref.child("User-Post").child(uid).child("roommate-post-count").setValue(ServerValue.increment(1));
 
-        //add count for this user
-        //addCount(uid);
     }
 
 
@@ -141,28 +121,25 @@ public class postRepo {
     }
 
     public void getHomePostList() {
-
-        myref.child("Home-Post").orderByChild("rent").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    List<HomePost> newHomeList = new ArrayList<HomePost>();
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        newHomeList.add(snapshot.getValue(HomePost.class));
+        for(int i = 0; i<2;i++) {
+            myref.child("Home-Post").orderByChild("rent").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        List<HomePost> newHomeList = new ArrayList<HomePost>();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            newHomeList.add(snapshot.getValue(HomePost.class));
+                        }
+                        mutableLiveHomePosts.postValue(newHomeList);
                     }
-                    mutableLiveHomePosts.postValue(newHomeList);
                 }
 
-                  //Note: For Test Only
-//                List<HomePost> newHomeList = new ArrayList<>();
-//                newHomeList.add(new HomePost("postkey1", "hZmlZQm00EYba4JqSQyavfXosQH3", "https://firebasestorage.googleapis.com/v0/b/easysublet-d9441.appspot.com/o/images%2Fapart1.jpeg?alt=media&token=87f1ac1a-66ec-4daf-ac13-08ba2b850c71", "This is post 1", true,"1009 N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-23", ""));
-//                mutableLiveHomePosts.postValue(newHomeList);
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
 
     }
 
@@ -187,51 +164,26 @@ public class postRepo {
         });
     }
 
-//    public static HomePost getHomePost(int idx) {
-//        List<HomePost> list = mainRepo.getHomePostData().getValue();
-//        return list.get(idx-1);
-//    }
-
     public void getRoommatePostList() {
-
-        myref.child("Roommate-Post").orderByChild("rent").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                List<RoommatePost> roommatePostlist = new ArrayList<RoommatePost>();
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        roommatePostlist.add(snapshot.getValue(RoommatePost.class));
+        for(int i = 0; i<2;i++) {
+            myref.child("Roommate-Post").orderByChild("rent").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    List<RoommatePost> roommatePostlist = new ArrayList<RoommatePost>();
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            roommatePostlist.add(snapshot.getValue(RoommatePost.class));
+                        }
                     }
+                    mutableLiveRoommatePosts.postValue(roommatePostlist);
                 }
-                mutableLiveRoommatePosts.postValue(roommatePostlist);
 
-//                List<RoommatePost> roommatePostlist = new ArrayList<>();
-//                roommatePostlist.add(new RoommatePost("1","ban", R.drawable.apart1, "This is test", true,"N High Str 1999", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("2","Walter", R.drawable.apart2, "This is post 2", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("3","Walter", R.drawable.house1, "This is post 3", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("4","Walter", R.drawable.house2, "This is post 4", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("5","Walter", R.drawable.house3, "This is post 5", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("6","Walter", R.drawable.apart1, "This is post 6", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("7","Walter", R.drawable.apart2, "This is post 7", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("8","Walter", R.drawable.house1, "This is post 8", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("9","Walter", R.drawable.house2, "This is post 9", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("10","Walter", R.drawable.house3, "This is post 10", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("11","Walter", R.drawable.apart1, "This is post 11", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("12","Walter", R.drawable.apart2, "This is post 12", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("13","Walter", R.drawable.house1, "This is post 13", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("14","Walter", R.drawable.house2, "This is post 14", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("15","Walter", R.drawable.house3, "This is post 15", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-
-//                mutableLiveRoommatePosts.postValue(roommatePostlist);
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+                }
+            });
+        }
     }
 
     public void getRoommatePost(String index) {
@@ -245,24 +197,6 @@ public class postRepo {
                 }
                 mutableLiveSingleRoommatePost.postValue(roommatePost);
 
-//                List<RoommatePost> roommatePostlist = new ArrayList<>();
-//                roommatePostlist.add(new RoommatePost("1","ban", R.drawable.apart1, "This is test", true,"N High Str 1999", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("2","Walter", R.drawable.apart2, "This is post 2", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("3","Walter", R.drawable.house1, "This is post 3", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("4","Walter", R.drawable.house2, "This is post 4", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("5","Walter", R.drawable.house3, "This is post 5", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("6","Walter", R.drawable.apart1, "This is post 6", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("7","Walter", R.drawable.apart2, "This is post 7", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("8","Walter", R.drawable.house1, "This is post 8", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("9","Walter", R.drawable.house2, "This is post 9", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("10","Walter", R.drawable.house3, "This is post 10", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("11","Walter", R.drawable.apart1, "This is post 11", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("12","Walter", R.drawable.apart2, "This is post 12", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("13","Walter", R.drawable.house1, "This is post 13", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("14","Walter", R.drawable.house2, "This is post 14", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("15","Walter", R.drawable.house3, "This is post 15", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//
-//                mutableLiveSingleRoommatePost.postValue(roommatePostlist.get(3));
                 //TODO: get only one child from firebase
             }
             @Override
@@ -272,11 +206,6 @@ public class postRepo {
         });
     }
 
-
-//    public static RoommatePost getRoommatePost(int idx) {
-//        List<RoommatePost> list = getRoommatePostList();
-//        return list.get(idx-1);
-//    }
 
     public void uploadImage(Uri imagePath){
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -328,8 +257,6 @@ public class postRepo {
 
     }
 
-    //TODO: implement-some are new added from github- 4-12
-
     //Other functions
     public void getSearchedHomePostList(String title) {
 
@@ -340,20 +267,14 @@ public class postRepo {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         HomePost post = snapshot.getValue(HomePost.class);
-                        if (post.getTitle().contains(title)){
+                        String pTitle = post.getTitle().toLowerCase();
+                        if (pTitle.contains(title.toLowerCase())){
                             newHomeList.add(post);
                         }
 
                     }
                 }
                 mutableLiveHomePosts.postValue(newHomeList);
-
-//                List<HomePost> newHomeList = new ArrayList<>();
-//                newHomeList.add(new HomePost("1", "jack", R.drawable.apart1, "This is post 1", true,"1009 N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                newHomeList.add(new HomePost("2","Walter", R.drawable.apart2, "This is post 2", true,"2001 N High Str", "walter@hotmail.com", 2,2, false, "male", false, 800, "2022-03-21", ""));
-//                newHomeList.add(new HomePost("3", "Walter", R.drawable.house1, "This is post 3", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                newHomeList.add(new HomePost("4", "Walter", R.drawable.house2, "This is post 4", true,"N High Str", "walter@hotmail.com", 2,2, false, "male", false, 800, "2022-03-21", ""));
-//                mutableLiveHomePosts.postValue(newHomeList);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -371,23 +292,14 @@ public class postRepo {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         RoommatePost post = snapshot.getValue(RoommatePost.class);
-                        if (post.getTitle().contains(title)){
+                        String pTitle = post.getTitle().toLowerCase();
+                        if (pTitle.contains(title.toLowerCase())){
                             roommatePostlist.add(post);
                         }
 
                     }
                 }
                 mutableLiveRoommatePosts.postValue(roommatePostlist);
-
-//                List<RoommatePost> roommatePostlist = new ArrayList<>();
-//                roommatePostlist.add(new RoommatePost("1","ban", R.drawable.apart1, "This is test", true,"N High Str 1999", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("2","Walter", R.drawable.apart2, "This is post 2", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("3","Walter", R.drawable.house1, "This is post 3", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("4","Walter", R.drawable.house2, "This is post 4", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("5","Walter", R.drawable.house3, "This is post 5", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//                roommatePostlist.add(new RoommatePost("6","Walter", R.drawable.apart1, "This is post 6", true,"N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//
-//                mutableLiveRoommatePosts.postValue(roommatePostlist);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -410,11 +322,6 @@ public class postRepo {
                     }
                 }
                 mutableLiveHomePosts.postValue(newHomeList);
-
-//                List<HomePost> newHomeList = new ArrayList<>();
-//                newHomeList.add(new HomePost("1", "jack", R.drawable.apart1, "This is post 1", true,"1009 N High Str", "walter@hotmail.com", 2,2, true, "male", true, 800, "2022-03-21", ""));
-//                newHomeList.add(new HomePost("2","Walter", R.drawable.apart2, "This is post 2", true,"2001 N High Str", "walter@hotmail.com", 2,2, false, "male", false, 800, "2022-03-21", ""));
-//                mutableLiveHomePosts.postValue(newHomeList);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -436,11 +343,6 @@ public class postRepo {
                     }
                 }
                 mutableLiveRoommatePosts.postValue(roommatePostlist);
-
-//                List<RoommatePost> roommatePostlist = new ArrayList<>();
-//                roommatePostlist.add(new RoommatePost("1","ban", R.drawable.apart1, "This is test", true,"N High Str 1999", "walter@hotmail.com", 2,2, true, "male", false, 800, "2022-03-21", ""));
-//
-//                mutableLiveRoommatePosts.postValue(roommatePostlist);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

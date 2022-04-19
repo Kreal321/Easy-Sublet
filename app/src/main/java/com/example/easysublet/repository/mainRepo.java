@@ -61,9 +61,6 @@ public class mainRepo {
     }
 
     public void signUp(String username,String email , String password){
-//        User user = new User(username,email,password);
-//        myref.child("User").child(email).setValue(user);
-
         //NOTE: Firebase Signup
         auth.createUserWithEmailAndPassword(email , password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -105,27 +102,12 @@ public class mainRepo {
     }
 
     public void getAccount(String email){
-//        myref.child("User").child(email).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                if (!task.isSuccessful()) {
-//                    Log.e("firebase", "Error getting data", task.getException());
-//                }
-//                else {
-//                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-//                    User user = task.getResult().getValue(User.class);
-//                    mutableLiveUserData.postValue(user);
-//                }
-//            }
-//        });
 
         SharedPreferences passStored = application.getBaseContext().getSharedPreferences("password",Context.MODE_PRIVATE);
         String password = passStored.getString("password",null);
         FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
         User user = new User(fuser.getDisplayName(), fuser.getEmail(), fuser.getUid());
         mutableLiveUserData.postValue(user);
-
-
     }
 
     public void login(String email , String pass){
@@ -156,10 +138,6 @@ public class mainRepo {
     }
 
     public void changePassword(String oldPassword, String newPassword){
-//        SharedPreferences emailStored = application.getSharedPreferences("email",Context.MODE_PRIVATE);
-//        String email = emailStored.getString("email",null);
-//        myref.child("User").child(email).child("password").setValue(newPassword);
-
         //DialogUtils.showProgressDialog(getActivity(), "Re-Authenticating", "Please wait...", false);
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         AuthCredential authCredential = EmailAuthProvider.getCredential(firebaseUser.getEmail(), oldPassword);
@@ -214,8 +192,8 @@ public class mainRepo {
             }
         });
 
-        //TODO: delete related posts
-        //TODO: delete related images in storage
+        //Note: delete related posts
+        //Note: delete related images in storage
         myref.child("Home-Post").orderByChild("username").equalTo(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -228,11 +206,9 @@ public class mainRepo {
                         myref.child("Home-Post").child(key).removeValue();
                     }
                 }
-
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 

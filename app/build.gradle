@@ -102,4 +102,6 @@ dependencies {
 //
 //    implementation 'androidx.annotation:annotation:1.0.0'
 
+    //for Swipe to refresh
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 }

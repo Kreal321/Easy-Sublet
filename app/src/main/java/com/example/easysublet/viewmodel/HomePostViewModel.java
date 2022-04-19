@@ -1,14 +1,12 @@
 package com.example.easysublet.viewmodel;
 
 import android.app.Application;
-import android.net.Uri;
 import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
-import com.example.easysublet.R;
 import com.example.easysublet.model.HomePost;
 import com.example.easysublet.model.User;
 import com.example.easysublet.repository.mainRepo;
@@ -67,28 +65,8 @@ public class HomePostViewModel extends AndroidViewModel {
     }
 
     public void setPost(String index) {
-//        mPostList.observe(getApplication(), new Observer<List<HomePost>>() {
-//            @Override
-//            public void onChanged(List<HomePost> homePosts) {
-//                if (postList.size()>=index) {
-//                    mPost.postValue(postList.get(index - 1));
-//                }
-//            }
-//        });
         repository.getHomePost(index);
         Log.d("IMAGE ON 1 POST", "TEST Failed");
-//        if (postList!= null && postList.size()>=index) {
-//            Log.d("IMAGE ON 1 POST", "TEST IMAGE");
-//            mPost.setValue(postList.get(index - 1));
-//        }
     }
-
-    public void uploadImage(){
-//        Uri imageUri = Uri.parse("android.resource://" + getApplication().getPackageName() +
-//                R.drawable.house2);
-        Uri fileUri = Uri.parse("android.resource://com.example.easysublet/" + R.drawable.house2);
-        repository.uploadImage(fileUri);
-    }
-
 
 }

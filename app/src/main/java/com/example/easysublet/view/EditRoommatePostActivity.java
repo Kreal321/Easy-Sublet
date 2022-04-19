@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.easysublet.R;
 import com.example.easysublet.databinding.ActivityEditRoommatePostBinding;
 import com.example.easysublet.model.RoommatePost;
+import com.example.easysublet.repository.helperRepo;
 import com.example.easysublet.viewmodel.EditRoommatePostViewModel;
 import com.example.easysublet.viewmodel.RoommatePostViewModel;
 import com.google.android.material.datepicker.CalendarConstraints;
@@ -225,26 +226,28 @@ public class EditRoommatePostActivity extends AppCompatActivity implements View.
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.updateBtn:
-                //TODO: need inputs checking
-                thisPost.observe(this, new Observer<RoommatePost>() {
-                    @Override
-                    public void onChanged(RoommatePost roommatePost) {
-                        if(!postInputCheck()) return;
-                        if(roommatePost != null){
-                            Log.d(TAG, "Entered Here 1:");
-                            SharedPreferences uriStored = getSharedPreferences("uri",Context.MODE_PRIVATE);
-                            String uri = uriStored.getString("uri",null);
-                            if(uri!= null && changeImage == true){
-                                Log.d(TAG, "Image changed");
-                                editRoommatePostViewModel.updatePost(roommatePost.getIndex(),roommatePost.getUsername(), binding.titleEntry.getText().toString(), roommatePost.isActive(),binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), uri);
-                            }else {
-                                Log.d(TAG, "Image no changed "+changeImage);
-                                editRoommatePostViewModel.updatePost(roommatePost.getIndex(),roommatePost.getUsername(), binding.titleEntry.getText().toString(), roommatePost.isActive(),binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), roommatePost.getImage());
+                if(helperRepo.isConnected(getApplication())){
+                    //TODO: need inputs checking
+                    thisPost.observe(this, new Observer<RoommatePost>() {
+                        @Override
+                        public void onChanged(RoommatePost roommatePost) {
+                            if (!postInputCheck()) return;
+                            if (roommatePost != null) {
+                                Log.d(TAG, "Entered Here 1:");
+                                SharedPreferences uriStored = getSharedPreferences("uri", Context.MODE_PRIVATE);
+                                String uri = uriStored.getString("uri", null);
+                                if (uri != null && changeImage == true) {
+                                    Log.d(TAG, "Image changed");
+                                    editRoommatePostViewModel.updatePost(roommatePost.getIndex(), roommatePost.getUsername(), binding.titleEntry.getText().toString(), roommatePost.isActive(), binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), uri);
+                                } else {
+                                    Log.d(TAG, "Image no changed " + changeImage);
+                                    editRoommatePostViewModel.updatePost(roommatePost.getIndex(), roommatePost.getUsername(), binding.titleEntry.getText().toString(), roommatePost.isActive(), binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), roommatePost.getImage());
+                                }
+                                finish();
                             }
-                            finish();
                         }
-                    }
-                });
+                    });
+                }
                 break;
 
             case R.id.postPhoto:

@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.easysublet.R;
 import com.example.easysublet.databinding.ActivityEditHomePostBinding;
 import com.example.easysublet.model.HomePost;
+import com.example.easysublet.repository.helperRepo;
 import com.example.easysublet.viewmodel.EditHomePostViewModel;
 import com.example.easysublet.viewmodel.HomePostViewModel;
 import com.google.android.material.datepicker.CalendarConstraints;
@@ -226,29 +227,29 @@ public class EditHomePostActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.updateBtn:
+                if(helperRepo.isConnected(getApplication())){
+                    thisPost.observe(this, new Observer<HomePost>() {
+                        @Override
+                        public void onChanged(HomePost homePost) {
+                            if (!postInputCheck()) return;
+                            if (homePost != null) {
 
-                thisPost.observe(this, new Observer<HomePost>() {
-                    @Override
-                    public void onChanged(HomePost homePost) {
-                        if(!postInputCheck()) return;
-                        if(homePost != null){
-
-                            SharedPreferences uriStored = getSharedPreferences("uri",Context.MODE_PRIVATE);
-                            String uri = uriStored.getString("uri",null);
-                            if(uri!= null && changeImage == true){
-                                Log.d(TAG, "Image changed");
-                                editHomePostViewModel.updatePost(homePost.getIndex(),homePost.getUsername(), binding.titleEntry.getText().toString(), homePost.isActive(),binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), uri);
-                            }else {
-                                Log.d(TAG, "Image no changed "+changeImage);
-                                editHomePostViewModel.updatePost(homePost.getIndex(), homePost.getUsername(), binding.titleEntry.getText().toString(), homePost.isActive(), binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), homePost.getImage());
+                                SharedPreferences uriStored = getSharedPreferences("uri", Context.MODE_PRIVATE);
+                                String uri = uriStored.getString("uri", null);
+                                if (uri != null && changeImage == true) {
+                                    Log.d(TAG, "Image changed");
+                                    editHomePostViewModel.updatePost(homePost.getIndex(), homePost.getUsername(), binding.titleEntry.getText().toString(), homePost.isActive(), binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), uri);
+                                } else {
+                                    Log.d(TAG, "Image no changed " + changeImage);
+                                    editHomePostViewModel.updatePost(homePost.getIndex(), homePost.getUsername(), binding.titleEntry.getText().toString(), homePost.isActive(), binding.addressEntry.getText().toString(), binding.timeEntry.getText().toString(), Integer.parseInt(binding.rentEntry.getText().toString()), binding.contactEntry.getText().toString(), Integer.parseInt(binding.bathroomEntry.getText().toString()), Integer.parseInt(binding.bedroomEntry.getText().toString()), binding.genderEntry.getText().toString(), binding.cbPet.isChecked(), binding.cbFurnished.isChecked(), binding.infoEntry.getText().toString(), homePost.getImage());
+                                }
+                                finish();
                             }
-                            finish();
+
                         }
-
-                    }
-                });
-                //TODO: need inputs checking
-
+                    });
+                    //TODO: need inputs checking
+                }
                 break;
 
             case R.id.postPhoto:

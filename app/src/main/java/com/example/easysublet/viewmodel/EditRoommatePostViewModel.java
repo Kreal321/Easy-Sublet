@@ -51,20 +51,8 @@ public class EditRoommatePostViewModel extends AndroidViewModel {
     }
 
     public void setPost(String index) {
-//        mPostList.observe(getApplication(), new Observer<List<HomePost>>() {
-//            @Override
-//            public void onChanged(List<HomePost> homePosts) {
-//                if (postList.size()>=index) {
-//                    mPost.postValue(postList.get(index - 1));
-//                }
-//            }
-//        });
         repository.getRoommatePost(index);
         Log.d("IMAGE ON 1 POST", "TEST Failed");
-//        if (postList!= null && postList.size()>=index) {
-//            Log.d("IMAGE ON 1 POST", "TEST IMAGE");
-//            mPost.setValue(postList.get(index - 1));
-//        }
     }
 
     public void updatePost(String index, String username, String title, boolean active,String address, String time, int rent, String contact, int bathroomNum, int bedroomNum, String gender, boolean pet, boolean furnished, String other, String image) {

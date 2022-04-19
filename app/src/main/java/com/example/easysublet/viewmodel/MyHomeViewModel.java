@@ -14,14 +14,6 @@ import java.util.List;
 
 public class MyHomeViewModel extends AndroidViewModel {
 
-
-
-
-
-
-
-
-    //----------
     private static final String TAG = "MyHomeViewModel";
     private final MutableLiveData<String> mText;
     private MutableLiveData<List<HomePost>> mList;
@@ -49,9 +41,6 @@ public class MyHomeViewModel extends AndroidViewModel {
     public MutableLiveData<List<HomePost>> getPostList() {
         return mList;
     }
-//    public LiveData<String> getText() {
-//        return mText;
-//    }
 
     public void getFilteredPostList(String title) {
         repo.getSearchedHomePostList(title);

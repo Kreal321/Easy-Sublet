@@ -41,9 +41,6 @@ public class MyRoommatesViewModel extends AndroidViewModel {
     public MutableLiveData<List<RoommatePost>> getPostList() {
         return mList;
     }
-//    public LiveData<String> getText() {
-//        return mText;
-//    }
 
     public void getFilteredPostList(String title) {
         repo.getSearchedRoommatePostList(title);

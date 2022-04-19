@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.easysublet.R;
 import com.example.easysublet.databinding.ActivitySignUpBinding;
 import com.example.easysublet.model.User;
+import com.example.easysublet.repository.helperRepo;
 import com.example.easysublet.viewmodel.SignUpViewModel;
 
 import java.util.Locale;
@@ -78,16 +79,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.signUpBtn:
-
-                if(binding.passwordEntry!=null && binding.emailEntry!=null && binding.usernameEntry!=null) {
-                    if (!binding.passwordEntry.getText().toString().equals(binding.confirmPasswordEntry.getText().toString())) {
-                        Toast.makeText(SignUpActivity.this, "Two passwords are different", Toast.LENGTH_SHORT).show();
-                        binding.passwordEntry.setText(null);
-                        binding.confirmPasswordEntry.setText(null);
-                    } else{
-                        signUpViewModel.addUser(binding.usernameEntry.getText().toString(), binding.emailEntry.getText().toString(), binding.passwordEntry.getText().toString());
-                        Toast.makeText(SignUpActivity.this, R.string.register_succeeded, Toast.LENGTH_SHORT).show();
-                        finish();
+                if(helperRepo.isConnected(getApplication())){
+                    if (binding.passwordEntry != null && binding.emailEntry != null && binding.usernameEntry != null) {
+                        if (!binding.passwordEntry.getText().toString().equals(binding.confirmPasswordEntry.getText().toString())) {
+                            Toast.makeText(SignUpActivity.this, "Two passwords are different", Toast.LENGTH_SHORT).show();
+                            binding.passwordEntry.setText(null);
+                            binding.confirmPasswordEntry.setText(null);
+                        } else {
+                            signUpViewModel.addUser(binding.usernameEntry.getText().toString(), binding.emailEntry.getText().toString(), binding.passwordEntry.getText().toString());
+                            Toast.makeText(SignUpActivity.this, R.string.register_succeeded, Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
                     }
                 }
                 break;
@@ -107,4 +109,5 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         super.finish();
     }
+
 }
